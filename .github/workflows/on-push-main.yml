@@ -1,0 +1,15 @@
+name: CI for main branch
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-go:
+    strategy:
+      matrix:
+        go-version: [stable, oldstable, ""]
+    uses: ./.github/workflows/wf-test-go.yml
+    with:
+      go-version: ${{ matrix.go-version }}
+      go-cache: true
