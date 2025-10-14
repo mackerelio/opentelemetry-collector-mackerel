@@ -1,0 +1,12 @@
+name: CI for pull requests (exporter/mackerelotlpexporter)
+
+on:
+  pull_request:
+    paths:
+      - exporter/mackerelotlpexporter/**
+
+jobs:
+  test:
+    uses: ./.github/workflows/wf-test-golib.yml
+    with:
+      working-directory: exporter/mackerelotlpexporter

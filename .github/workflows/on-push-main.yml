@@ -5,11 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  test-go:
-    strategy:
-      matrix:
-        go-version: [stable, oldstable, ""]
-    uses: ./.github/workflows/wf-test-go.yml
+  test-golibs:
+    uses: ./.github/workflows/wf-test-all-golibs.yml
     with:
-      go-version: ${{ matrix.go-version }}
       go-cache: true

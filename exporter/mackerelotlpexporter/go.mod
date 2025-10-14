@@ -2,8 +2,6 @@ module github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelo
 
 go 1.24.0
 
-toolchain go1.25.3
-
 require (
 	github.com/stretchr/testify v1.11.1
 	go.opentelemetry.io/collector/component v1.43.0
