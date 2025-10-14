@@ -48,17 +48,3 @@ func (cfg *Config) mackerelApiKey() (configopaque.String, error) {
 		return "", errors.New("Mackerel API key must be specified") //nolint:staticcheck // Mackerel is proper noun
 	}
 }
-
-func (cfg *Config) metricsEndpoint() string {
-	if v := cfg.MetricsEndpoint; v != "" {
-		return v
-	}
-	return "otlp.mackerelio.com:4317"
-}
-
-func (cfg *Config) tracesEndpoint() string {
-	if v := cfg.TracesEndpoint; v != "" {
-		return v
-	}
-	return "https://otlp-vaxila.mackerelio.com"
-}

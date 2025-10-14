@@ -40,7 +40,7 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	otlpCfg.ClientConfig.Headers = map[string]configopaque.String{
 		"Mackerel-Api-Key": mackerelApiKey,
 	}
-	otlpCfg.ClientConfig.Endpoint = mackerelOTLPCfg.metricsEndpoint()
+	otlpCfg.ClientConfig.Endpoint = mackerelOTLPCfg.MetricsEndpoint
 	otlpCfg.ClientConfig.Compression = "gzip"
 
 	exp, err := factory.CreateMetrics(ctx, otlpSet, otlpCfg)
@@ -80,7 +80,7 @@ func createTraces(ctx context.Context, set exporter.Settings, cfg component.Conf
 		"Mackerel-Api-Key": mackerelApiKey,
 		"Accept":           "*/*",
 	}
-	otlpHTTPCfg.ClientConfig.Endpoint = mackerelOTLPCfg.tracesEndpoint()
+	otlpHTTPCfg.ClientConfig.Endpoint = mackerelOTLPCfg.TracesEndpoint
 	otlpHTTPCfg.ClientConfig.Compression = "gzip"
 
 	exp, err := factory.CreateTraces(ctx, otlpHTTPSet, otlpHTTPCfg)
