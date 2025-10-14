@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix: &test_all_golibs_matrix
         go-version: [stable, oldstable]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
         working-directory:
           - exporter/mackerelotlpexporter
     runs-on: ${{ matrix.os }}

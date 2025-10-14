@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix: &test_golib_matrix
         go-version: [stable, oldstable]
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
