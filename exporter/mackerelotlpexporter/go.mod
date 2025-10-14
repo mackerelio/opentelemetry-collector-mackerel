@@ -1,4 +1,4 @@
-module github.com/mackerelio/opentelemetry-collector-mackerel
+module github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter
 
 go 1.24.0
 
