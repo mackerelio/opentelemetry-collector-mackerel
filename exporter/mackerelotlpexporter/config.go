@@ -14,9 +14,22 @@ type Config struct {
 	QueueConfig    exporterhelper.QueueBatchConfig `mapstructure:"sending_queue"`
 	RetryConfig    configretry.BackOffConfig       `mapstructure:"retry_on_failure"`
 	MackerelApiKey configopaque.String             `mapstructure:"mackerel_api_key"`
+	// MetricsEndpoint configurations are provided for testing purposes and may be modified or deprecated.
+	MetricsEndpoint string `mapstructure:"metrics_endpoint"`
+	// TracesEndpoint configurations are provided for testing purposes and may be modified or deprecated.
+	TracesEndpoint string `mapstructure:"traces_endpoint"`
 }
 
 func (cfg *Config) Validate() error {
+	if err := cfg.TimeoutConfig.Validate(); err != nil {
+		return err
+	}
+	if err := cfg.QueueConfig.Validate(); err != nil {
+		return err
+	}
+	if err := cfg.RetryConfig.Validate(); err != nil {
+		return err
+	}
 	if _, err := cfg.mackerelApiKey(); err != nil {
 		return err
 	}

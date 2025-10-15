@@ -1,0 +1,15 @@
+type: mackerelotlp
+github_project: mackerelio/opentelemetry-collector-mackerel
+
+status:
+  disable_codecov_badge: true
+  class: exporter
+  stability:
+    development: [traces, metrics]
+  distributions: []
+
+tests:
+  config:
+    mackerel_api_key: "dummy-api-key"
+    metrics_endpoint: "example.invalid"
+    traces_endpoint: "https://example.invalid"

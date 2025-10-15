@@ -1,0 +1,22 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+
+exporters:
+  mackerelotlp:
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [mackerelotlp]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [mackerelotlp]
