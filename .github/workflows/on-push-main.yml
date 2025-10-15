@@ -1,0 +1,11 @@
+name: CI for main branch
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-golibs:
+    uses: ./.github/workflows/wf-test-all-golibs.yml
+    with:
+      go-cache: true
