@@ -33,6 +33,9 @@ processors:
     send_batch_size: 5000
     send_batch_max_size: 5000
 
+exporters:
+  mackerelotlp:
+
 service:
   pipelines:
     metrics:
