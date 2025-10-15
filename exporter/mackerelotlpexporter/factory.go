@@ -11,6 +11,8 @@ import (
 func createDefaultConfig() component.Config {
 	return &Config{
 		// overrides default exporter timeout config
+		// because transport to Mackerel may take longer than 5 seconds,
+		// which is default value in official OTLP exporters.
 		TimeoutConfig: exporterhelper.TimeoutConfig{
 			Timeout: 10 * time.Second,
 		},
