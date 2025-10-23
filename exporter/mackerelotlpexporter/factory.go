@@ -13,6 +13,7 @@ import (
 
 const (
 	defaultTimeout         = 10 * time.Second
+	defaultQueueSizeBytes  = 5_000_000 // 5MB
 	defaultMetricsEndpoint = "otlp.mackerelio.com:4317"
 	defaultTracesEndpoint  = "https://otlp-vaxila.mackerelio.com"
 )
@@ -27,6 +28,12 @@ func NewFactory() exporter.Factory {
 }
 
 func createDefaultConfig() component.Config {
+	queueConfig := exporterhelper.NewDefaultQueueConfig()
+	// overrides default exporter queue batch config
+	// because Vaxila endpoint does not accept requests larger than 6MB.
+	queueConfig.Sizer = exporterhelper.RequestSizerTypeBytes
+	queueConfig.QueueSize = defaultQueueSizeBytes
+
 	return &Config{
 		// overrides default exporter timeout config
 		// because transport to Mackerel may take longer than 5 seconds,
@@ -34,7 +41,7 @@ func createDefaultConfig() component.Config {
 		TimeoutConfig: exporterhelper.TimeoutConfig{
 			Timeout: defaultTimeout,
 		},
-		QueueConfig:     exporterhelper.NewDefaultQueueConfig(),
+		QueueConfig:     queueConfig,
 		RetryConfig:     configretry.NewDefaultBackOffConfig(),
 		MetricsEndpoint: defaultMetricsEndpoint,
 		TracesEndpoint:  defaultTracesEndpoint,
