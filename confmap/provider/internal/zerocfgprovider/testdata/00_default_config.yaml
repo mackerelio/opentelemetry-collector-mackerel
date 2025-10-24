@@ -1,0 +1,22 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+processors:
+  resourcedetection:
+    detectors: [env, system]
+    system:
+      hostname_sources: [os]
+exporters:
+  mackerelotlp:
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [mackerelotlp]
+    traces:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [mackerelotlp]
