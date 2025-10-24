@@ -24,14 +24,7 @@ receivers:
   otlp:
     protocols:
       grpc:
-        endpoint: 0.0.0.0:4317
       http:
-        endpoint: 0.0.0.0:4318
-
-processors:
-  batch:
-    send_batch_size: 5000
-    send_batch_max_size: 5000
 
 exporters:
   mackerelotlp:
@@ -40,11 +33,9 @@ service:
   pipelines:
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [mackerelotlp]
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [mackerelotlp]
 ```
 
