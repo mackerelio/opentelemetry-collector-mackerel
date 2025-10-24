@@ -67,7 +67,6 @@ type processorIDs struct {
 	memoryLimiterProcessorIDs []string
 	samplingProcessorIDs      []string
 	sendingSourceProcessorIDs []string
-	batchProcessorIDs         []string
 	otherProcessorIDs         []string
 }
 
@@ -78,7 +77,6 @@ func (p *processorIDs) GeneratePipeline() []string {
 		p.memoryLimiterProcessorIDs,
 		p.samplingProcessorIDs,
 		p.sendingSourceProcessorIDs,
-		p.batchProcessorIDs,
 		p.otherProcessorIDs,
 	)
 }
