@@ -3,6 +3,7 @@ module-sets:
     version: v0.1.0
     modules:
       - github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter
+      - github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider
 
 excluded-modules:
   # tag for root module is managed by Songmu/tagpr
