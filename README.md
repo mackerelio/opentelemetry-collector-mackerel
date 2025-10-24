@@ -10,7 +10,7 @@
 
 ## Distributions
 
-Currently, there are no OpenTelemetry Collector builds available for users.
+- [Mackerel OpenTelemetry Collector](./distributions/otelcol-mackerel/)
 
 ## Components
 

@@ -1,0 +1,53 @@
+dist:
+  module: github.com/mackerelio/opentelemetry-collector-mackerel/distributions/otelcol-mackerel
+  name: otelcol-mackerel
+  description: Mackerel OpenTelemetry Collector
+  version: 0.1.0
+  output_path: ./_build
+
+exporters:
+  - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.138.0
+  - gomod: go.opentelemetry.io/collector/exporter/nopexporter v0.138.0
+  - gomod: go.opentelemetry.io/collector/exporter/otlpexporter v0.138.0
+  - gomod: go.opentelemetry.io/collector/exporter/otlphttpexporter v0.138.0
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.1.0
+
+processors:
+  - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.138.0
+  - gomod: go.opentelemetry.io/collector/processor/memorylimiterprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/attributesprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/filterprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/probabilisticsamplerprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourceprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/tailsamplingprocessor v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/transformprocessor v0.138.0
+
+receivers:
+  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.138.0
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/httpcheckreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/mysqlreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/oracledbreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/postgresqlreceiver v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/redisreceiver v0.138.0
+
+connectors:
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/connector/routingconnector v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/connector/servicegraphconnector v0.138.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector v0.138.0
+
+providers:
+  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.44.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.44.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.44.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.44.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.44.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/confmap/provider/s3provider v0.138.0
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider v0.1.0
+
+replaces:
+  - github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter => ../../../exporter/mackerelotlpexporter
+  - github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider => ../../../confmap/provider/zerocfgprovider
