@@ -1,0 +1,23 @@
+name: CI for version tag (beta)
+
+on:
+  push:
+    tags: ["v0.*"]
+
+jobs:
+  update-multimod-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
+        with:
+          go-version-file: go.mod
+      - name: Verify
+        run: |
+          go tool multimod verify
+      - name: Create Tags
+        run: |
+          set -e
+          for tag in $(go tool multimod tag -c ${{ github.sha }} -m beta -p --print-tags); do \
+            git push origin "$tag"
+          done
