@@ -1,0 +1,12 @@
+name: CI for pull requests (confmap/provider/zerocfgprovider)
+
+on:
+  pull_request:
+    paths:
+      - confmap/provider/zerocfgprovider/**
+
+jobs:
+  test:
+    uses: ./.github/workflows/wf-test-golib.yml
+    with:
+      working-directory: confmap/provider/zerocfgprovider
