@@ -10,5 +10,5 @@ on:
       - confmap/provider/zerocfgprovider/**
 
 jobs:
-  build:
+  test:
     uses: ./.github/workflows/wf-test-otelcolmackerel.yml
