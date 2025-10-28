@@ -2,6 +2,8 @@ version: 2
 project_name: otelcol-mackerel
 env:
   - CGO_ENABLED=0
+release:
+  use_existing_draft: true
 builds:
   - id: otelcol-mackerel-linux
     goos:

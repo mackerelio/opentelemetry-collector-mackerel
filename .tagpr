@@ -49,3 +49,4 @@
 	vPrefix = true
 	releaseBranch = main
 	versionFile = distributions/otelcol-test/manifest.yaml,distributions/otelcol-mackerel/manifest.yaml,versions.yaml
+	release = draft
