@@ -11,4 +11,4 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/wf-test-otelcolmckerel.yml
+    uses: ./.github/workflows/wf-test-otelcolmackerel.yml
