@@ -10,6 +10,11 @@ jobs:
     with:
       go-cache: true
 
+  test-otelcolmackerel:
+    uses: ./.github/workflows/wf-test-otelcolmackerel.yml
+    with:
+      go-cache: true
+
   tagpr:
     runs-on: ubuntu-latest
     steps:
