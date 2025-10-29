@@ -1,0 +1,51 @@
+version: 2
+project_name: otelcol-mackerel
+env:
+  - CGO_ENABLED=0
+release:
+  use_existing_draft: true
+builds:
+  - id: otelcol-mackerel-linux
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+    dir: _build
+    binary: otelcol-mackerel
+  - id: otelcol-mackerel-darwin
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    ldflags:
+      - -s -w
+    dir: _build
+    binary: otelcol-mackerel
+archives:
+  - id: otelcol-mackerel
+    ids:
+      - otelcol-mackerel-linux
+      - otelcol-mackerel-darwin
+    name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+dockers_v2:
+  - id: otelcol-mackerel
+    ids:
+      - otelcol-mackerel-linux
+    images:
+      - mackerelio/opentelemetry-collector-mackerel/otelcol-mackerel
+      - gcr.io/mackerelio/opentelemetry-collector-mackerel/otelcol-mackerel
+    tags:
+      - "{{.Version}}"
+      - latest
+    platforms:
+      - linux/amd64
+      - linux/arm64
+# monorepo setting is not available in GoReleaser free edition,
+# which means that running goreleaser with including monorepo tags will result in unintended version names.
+# The workaround is setting custom tags via `GORELEASER_CURRENT_TAG` and `GORELEASER_PREVIOUS_TAG` environment value.
+# cf.) https://goreleaser.com/cookbooks/set-a-custom-git-tag/
+# monorepo:
+#   tag_prefix: v

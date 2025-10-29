@@ -1,0 +1,26 @@
+name: test otelcol-mackerel distribution
+
+on:
+  workflow_call:
+    inputs:
+      go-cache:
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
+        with:
+          go-version-file: go.mod
+          cache: ${{ inputs.go-cache }}
+      - name: Run OpenTelemetry Collector Builder
+        run: |
+          go generate .
+        working-directory: distributions/otelcol-mackerel
+      - name: Run GoReleaser
+        run: |
+          GORELEASER_CURRENT_TAG=v0.0.0 go tool goreleaser release --snapshot --clean
+        working-directory: distributions/otelcol-mackerel
