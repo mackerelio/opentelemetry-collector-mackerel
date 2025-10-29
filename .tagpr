@@ -50,3 +50,4 @@
 	releaseBranch = main
 	versionFile = distributions/otelcol-test/manifest.yaml,distributions/otelcol-mackerel/manifest.yaml,versions.yaml
 	release = draft
+	postVersionCommand = scripts/update-dists-own-components-version.sh
