@@ -30,6 +30,33 @@ archives:
       - otelcol-mackerel-linux
       - otelcol-mackerel-darwin
     name_template: "{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+nfpms:
+  - id: otelcol-mackerel
+    ids:
+      - otelcol-mackerel-linux
+    package_name: otelcol-mackerel
+    homepage: https://mackerel.io/
+    maintainer: Hatena <mackerel-developers@hatena.ne.jp>
+    description: Mackerel OpenTelemetry Collector
+    license: Apache 2.0
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
+    contents:
+      - src: otelcol-mackerel.service
+        dst: /lib/systemd/system/otelcol-mackerel.service
+      - src: otelcol-mackerel.conf
+        dst: /etc/otelcol-mackerel/otelcol-mackerel.conf
+        type: config|noreplace
+    scripts:
+      preinstall: preinstall.sh
+      postinstall: postinstall.sh
+      preremove: preremove.sh
+    overrides:
+      rpm:
+        dependencies:
+          - /bin/sh
 dockers_v2:
   - id: otelcol-mackerel
     ids:
