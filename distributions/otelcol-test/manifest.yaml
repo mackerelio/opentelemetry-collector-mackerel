@@ -6,7 +6,7 @@ dist:
   output_path: ./_build
 
 exporters:
-  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.0.0
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.1.0
 
 processors:
   - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.137.0
