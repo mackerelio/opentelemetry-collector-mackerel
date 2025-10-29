@@ -5,6 +5,42 @@ on:
     tags: ["v0.*"]
 
 jobs:
+  release-otelcol-mackerel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
+        with:
+          go-version-file: go.mod
+      - name: Login to Docker Hub
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: prev-version-tag
+        name: Get the previous version tag
+        run: |
+          gh release list --json tagName,isLatest --jq '.[] | select(.isLatest) | "PREVIOUS_TAG=" + .tagName' >> "$GITHUB_OUTPUT"
+      - name: Run OpenTelemetry Collector Builder
+        run: |
+          go generate .
+        working-directory: distributions/otelcol-mackerel
+      - name: Run GoReleaser
+        run: |
+          go tool goreleaser release
+        working-directory: distributions/otelcol-mackerel
+        env:
+          GORELEASER_CURRENT_TAG: ${{ github.sha }}
+          GORELEASER_PREVIOUS_TAG: ${{ steps.prev-version-tag.outputs.PREVIOUS_TAG }}
+
   update-multimod-tags:
     runs-on: ubuntu-latest
     steps:
