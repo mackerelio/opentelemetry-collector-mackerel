@@ -40,7 +40,7 @@ jobs:
           go tool goreleaser release
         working-directory: distributions/otelcol-mackerel
         env:
-          GORELEASER_CURRENT_TAG: ${{ github.sha }}
+          GORELEASER_CURRENT_TAG: ${{ github.ref_name }}
           GORELEASER_PREVIOUS_TAG: ${{ steps.prev-version-tag.outputs.PREVIOUS_TAG }}
           GITHUB_TOKEN: ${{ github.token }}
 
