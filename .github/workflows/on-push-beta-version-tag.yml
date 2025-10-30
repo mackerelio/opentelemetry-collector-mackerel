@@ -42,6 +42,7 @@ jobs:
         env:
           GORELEASER_CURRENT_TAG: ${{ github.sha }}
           GORELEASER_PREVIOUS_TAG: ${{ steps.prev-version-tag.outputs.PREVIOUS_TAG }}
+          GITHUB_TOKEN: ${{ github.token }}
 
   update-multimod-tags:
     runs-on: ubuntu-latest
