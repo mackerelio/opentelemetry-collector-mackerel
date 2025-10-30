@@ -2,11 +2,11 @@ dist:
   module: github.com/mackerelio/opentelemetry-collector-mackerel/distributions/otelcol-test
   name: otelcol-mackerel-test
   description: Mackerel Distro of OpenTelemetry Test Collector
-  version: 0.1.0
+  version: 0.2.0
   output_path: ./_build
 
 exporters:
-  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.1.0
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.2.0
 
 processors:
   - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.137.0
