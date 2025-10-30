@@ -3,12 +3,12 @@
 set -e
 
 if [ -z "$TAGPR_CURRENT_VERSION" ]; then
-  echo "Error: TAGPR_CURRENT_VERSION environment variable is not set"
+  echo "Error: TAGPR_CURRENT_VERSION environment variable is not set" >&2
   exit 1
 fi
 
 if [ -z "$TAGPR_NEXT_VERSION" ]; then
-  echo "Error: TAGPR_NEXT_VERSION environment variable is not set"
+  echo "Error: TAGPR_NEXT_VERSION environment variable is not set" >&2
   exit 1
 fi
 
