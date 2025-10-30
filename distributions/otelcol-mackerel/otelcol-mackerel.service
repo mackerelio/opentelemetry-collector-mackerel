@@ -1,0 +1,16 @@
+[Unit]
+Description=Mackerel OpenTelemetry Collector
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/otelcol-mackerel/otelcol-mackerel.conf
+ExecStart=/usr/bin/otelcol-mackerel $OTELCOL_MACKEREL_OPTIONS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+Restart=on-failure
+Type=simple
+User=otelcol-mackerel
+Group=otelcol-mackerel
+
+[Install]
+WantedBy=multi-user.target
