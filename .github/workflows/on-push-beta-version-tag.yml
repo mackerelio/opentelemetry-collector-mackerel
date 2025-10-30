@@ -53,6 +53,10 @@ jobs:
       - name: Verify
         run: |
           go tool multimod verify
+      - name: Set git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - name: Create Tags
         run: |
           set -e
