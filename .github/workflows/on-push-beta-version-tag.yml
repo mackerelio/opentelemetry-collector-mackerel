@@ -29,6 +29,8 @@ jobs:
         name: Get the previous version tag
         run: |
           gh release list --json tagName,isLatest --jq '.[] | select(.isLatest) | "PREVIOUS_TAG=" + .tagName' >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Run OpenTelemetry Collector Builder
         run: |
           go generate .
