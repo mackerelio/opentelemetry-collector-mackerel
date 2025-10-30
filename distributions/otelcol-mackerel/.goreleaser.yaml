@@ -70,6 +70,7 @@ dockers_v2:
     platforms:
       - linux/amd64
       - linux/arm64
+    sbom: false
 # monorepo setting is not available in GoReleaser free edition,
 # which means that running goreleaser with including monorepo tags will result in unintended version names.
 # The workaround is setting custom tags via `GORELEASER_CURRENT_TAG` and `GORELEASER_PREVIOUS_TAG` environment value.
