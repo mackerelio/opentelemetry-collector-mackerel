@@ -6,8 +6,9 @@
     {
       "matchManagers": ["gomod"],
       "matchDatasources": ["go"],
-      "groupName": "go.opentelemetry.io/collector",
-      "matchPackageNames": ["/^go.opentelemetry.io/collector/"]
+      "groupName": "opentelemetry-collector upstream dependencies",
+      "matchPackageNames": ["/^go.opentelemetry.io/collector/"],
+      "labels": ["upgrade-otelcol-libs"]
     },
     {
       "matchManagers": ["ocb"],
@@ -15,7 +16,8 @@
         "https://github.com/open-telemetry/opentelemetry-collector",
         "https://github.com/open-telemetry/opentelemetry-collector-contrib"
       ],
-      "groupName": "opentelemetry-collector upstream dependencies"
+      "groupName": "opentelemetry-collector upstream dependencies",
+      "labels": ["upgrade-otelcol-libs"]
     }
   ],
   "postUpdateOptions": ["gomodTidy"]
