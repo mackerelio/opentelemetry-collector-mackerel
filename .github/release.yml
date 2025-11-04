@@ -2,3 +2,7 @@ changelog:
   exclude:
     labels:
       - tagpr
+  categories:
+    - title: Base opentelemetry-collector libraries updates
+      labels:
+        - upgrade-otelcol-libs
