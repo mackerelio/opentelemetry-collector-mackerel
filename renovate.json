@@ -1,6 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+  "extends": ["config:recommended"],
+  "ocb": { "managerFilePatterns": ["/^distributions/.*/manifest\\.yaml$/"] },
+  "packageRules": [
+    {
+      "matchManagers": ["gomod"],
+      "matchDatasources": ["go"],
+      "groupName": "go.opentelemetry.io/collector",
+      "matchPackageNames": ["/^go.opentelemetry.io/collector/"]
+    },
+    {
+      "matchManagers": ["ocb"],
+      "matchSourceUrls": [
+        "https://github.com/open-telemetry/opentelemetry-collector",
+        "https://github.com/open-telemetry/opentelemetry-collector-contrib"
+      ],
+      "groupName": "opentelemetry-collector upstream dependencies"
+    }
+  ],
+  "postUpdateOptions": ["gomodTidy"]
 }
