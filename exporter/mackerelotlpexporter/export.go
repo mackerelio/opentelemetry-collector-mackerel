@@ -37,8 +37,8 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	otlpCfg.QueueConfig = mackerelOTLPCfg.QueueConfig
 	otlpCfg.RetryConfig = mackerelOTLPCfg.RetryConfig
 	otlpCfg.TimeoutConfig = mackerelOTLPCfg.TimeoutConfig
-	otlpCfg.ClientConfig.Headers = map[string]configopaque.String{
-		"Mackerel-Api-Key": mackerelApiKey,
+	otlpCfg.ClientConfig.Headers = configopaque.MapList{
+		{Name: "Mackerel-Api-Key", Value: mackerelApiKey},
 	}
 	otlpCfg.ClientConfig.Endpoint = mackerelOTLPCfg.MetricsEndpoint
 	otlpCfg.ClientConfig.Compression = "gzip"
@@ -76,9 +76,9 @@ func createTraces(ctx context.Context, set exporter.Settings, cfg component.Conf
 	otlpHTTPCfg.QueueConfig = mackerelOTLPCfg.QueueConfig
 	otlpHTTPCfg.RetryConfig = mackerelOTLPCfg.RetryConfig
 	otlpHTTPCfg.ClientConfig.Timeout = mackerelOTLPCfg.TimeoutConfig.Timeout
-	otlpHTTPCfg.ClientConfig.Headers = map[string]configopaque.String{
-		"Mackerel-Api-Key": mackerelApiKey,
-		"Accept":           "*/*",
+	otlpHTTPCfg.ClientConfig.Headers = configopaque.MapList{
+		{Name: "Accept", Value: "*/*"},
+		{Name: "Mackerel-Api-Key", Value: mackerelApiKey},
 	}
 	otlpHTTPCfg.ClientConfig.Endpoint = mackerelOTLPCfg.TracesEndpoint
 	otlpHTTPCfg.ClientConfig.Compression = "gzip"
