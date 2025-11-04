@@ -6,10 +6,10 @@ require (
 	github.com/stretchr/testify v1.11.1
 	go.opentelemetry.io/collector/component v1.44.0
 	go.opentelemetry.io/collector/component/componenttest v0.138.0
-	go.opentelemetry.io/collector/config/configopaque v1.44.0
+	go.opentelemetry.io/collector/config/configopaque v1.45.0
 	go.opentelemetry.io/collector/config/configoptional v1.44.0
 	go.opentelemetry.io/collector/config/configretry v1.44.0
-	go.opentelemetry.io/collector/confmap v1.44.0
+	go.opentelemetry.io/collector/confmap v1.45.0
 	go.opentelemetry.io/collector/exporter v1.44.0
 	go.opentelemetry.io/collector/exporter/exporterhelper v0.138.0
 	go.opentelemetry.io/collector/exporter/exportertest v0.138.0
@@ -71,7 +71,7 @@ require (
 	go.opentelemetry.io/collector/config/configmiddleware v1.44.0 // indirect
 	go.opentelemetry.io/collector/config/confignet v1.44.0 // indirect
 	go.opentelemetry.io/collector/config/configtls v1.44.0 // indirect
-	go.opentelemetry.io/collector/confmap/xconfmap v0.138.0 // indirect
+	go.opentelemetry.io/collector/confmap/xconfmap v0.139.0 // indirect
 	go.opentelemetry.io/collector/consumer v1.44.0 // indirect
 	go.opentelemetry.io/collector/consumer/consumererror v0.138.0 // indirect
 	go.opentelemetry.io/collector/consumer/consumererror/xconsumererror v0.138.0 // indirect
@@ -82,7 +82,7 @@ require (
 	go.opentelemetry.io/collector/extension/extensionauth v1.44.0 // indirect
 	go.opentelemetry.io/collector/extension/extensionmiddleware v0.138.0 // indirect
 	go.opentelemetry.io/collector/extension/xextension v0.138.0 // indirect
-	go.opentelemetry.io/collector/featuregate v1.44.0 // indirect
+	go.opentelemetry.io/collector/featuregate v1.45.0 // indirect
 	go.opentelemetry.io/collector/internal/telemetry v0.138.0 // indirect
 	go.opentelemetry.io/collector/pdata/pprofile v0.138.0 // indirect
 	go.opentelemetry.io/collector/pdata/xpdata v0.138.0 // indirect
