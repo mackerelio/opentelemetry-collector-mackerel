@@ -920,6 +920,7 @@ go.opentelemetry.io/build-tools/multimod v0.28.1 h1:jIxyXh9lW5hj27THxLfltfjMxCSZ
 go.opentelemetry.io/build-tools/multimod v0.28.1/go.mod h1:y7x03iZGe+A2rcESArINfpacOBLsRy4dwrtnsaLlWDg=
 go.opentelemetry.io/collector/cmd/builder v0.138.0 h1:DOQVEmTxeH4GOtsimq67GLBnLx4NIuY5PHniypK+gEU=
 go.opentelemetry.io/collector/cmd/builder v0.138.0/go.mod h1:qkw6DuFYsfcSdk1DxqOpx6aXsr3g35I1dapo9aSa6f8=
+go.opentelemetry.io/collector/cmd/builder v0.139.0/go.mod h1:qkw6DuFYsfcSdk1DxqOpx6aXsr3g35I1dapo9aSa6f8=
 go.opentelemetry.io/contrib/bridges/prometheus v0.63.0 h1:/Rij/t18Y7rUayNg7Id6rPrEnHgorxYabm2E6wUdPP4=
 go.opentelemetry.io/contrib/bridges/prometheus v0.63.0/go.mod h1:AdyDPn6pkbkt2w01n3BubRVk7xAsCRq1Yg1mpfyA/0E=
 go.opentelemetry.io/contrib/detectors/gcp v1.38.0 h1:ZoYbqX7OaA/TAikspPl3ozPI6iY6LiIY9I8cUfm+pJs=
