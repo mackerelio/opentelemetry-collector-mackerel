@@ -150,7 +150,7 @@ require (
 	github.com/go-fed/httpsig v1.1.0 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.6.2 // indirect
-	github.com/go-git/go-git/v5 v5.16.2 // indirect
+	github.com/go-git/go-git/v5 v5.16.3 // indirect
 	github.com/go-jose/go-jose/v4 v4.1.1 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -284,7 +284,7 @@ require (
 	github.com/sigstore/sigstore-go v0.7.1 // indirect
 	github.com/sigstore/timestamp-authority v1.2.5 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/skeema/knownhosts v1.3.1 // indirect
+	github.com/skeema/knownhosts v1.3.2 // indirect
 	github.com/slack-go/slack v0.17.3 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	github.com/spf13/afero v1.15.0 // indirect
@@ -313,8 +313,8 @@ require (
 	gitlab.com/gitlab-org/api/client-go v0.157.0 // indirect
 	go.mongodb.org/mongo-driver v1.17.3 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
-	go.opentelemetry.io/build-tools v0.28.1 // indirect
-	go.opentelemetry.io/build-tools/multimod v0.28.1 // indirect
+	go.opentelemetry.io/build-tools v0.29.0 // indirect
+	go.opentelemetry.io/build-tools/multimod v0.29.0 // indirect
 	go.opentelemetry.io/collector/cmd/builder v0.138.0 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.38.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.62.0 // indirect
