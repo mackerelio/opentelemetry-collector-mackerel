@@ -8,6 +8,8 @@ on:
       - distributions/otelcol-mackerel/**
       - exporter/mackerelotlpexporter/**
       - confmap/provider/zerocfgprovider/**
+      - .github/workflows/on-pull-request-otelcolmackerel.yml
+      - .github/workflows/wf-test-otelcolmackerel.yml
 
 jobs:
   test:

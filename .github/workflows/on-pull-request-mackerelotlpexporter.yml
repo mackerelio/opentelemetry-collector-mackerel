@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - exporter/mackerelotlpexporter/**
+      - .github/workflows/on-pull-request-mackerelotlpexporter.yml
+      - .github/workflows/wf-test-golib.yml
 
 jobs:
   test:
