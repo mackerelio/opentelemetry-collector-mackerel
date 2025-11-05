@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+
 version: 2
 project_name: otelcol-mackerel
 env:
@@ -70,6 +72,10 @@ dockers_v2:
     platforms:
       - linux/amd64
       - linux/arm64
+    flags:
+      - '{{ if index .Env "GITHUB_ACTIONS" }}--cache-from=type=gha{{ end }}'
+      - '{{ if index .Env "GITHUB_ACTIONS" }}--cache-to=type=gha,mode=max{{ end }}'
+
 # monorepo setting is not available in GoReleaser free edition,
 # which means that running goreleaser with including monorepo tags will result in unintended version names.
 # The workaround is setting custom tags via `GORELEASER_CURRENT_TAG` and `GORELEASER_PREVIOUS_TAG` environment value.
