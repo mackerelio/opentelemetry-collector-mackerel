@@ -2,7 +2,7 @@ module github.com/mackerelio/opentelemetry-collector-mackerel
 
 go 1.25.1
 
-toolchain go1.25.3
+toolchain go1.25.4
 
 tool (
 	github.com/goreleaser/goreleaser/v2
