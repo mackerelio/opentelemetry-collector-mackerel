@@ -7,13 +7,9 @@ on:
 jobs:
   test-golibs:
     uses: ./.github/workflows/wf-test-all-golibs.yml
-    with:
-      go-cache: true
 
   test-otelcolmackerel:
     uses: ./.github/workflows/wf-test-otelcolmackerel.yml
-    with:
-      go-cache: true
 
   tagpr:
     runs-on: ubuntu-latest
