@@ -6,3 +6,10 @@ changelog:
     - title: Base opentelemetry-collector libraries updates
       labels:
         - upgrade-otelcol-libs
+    - title: New features/enhancements
+      labels:
+        - major
+        - minor
+    - title: Other changes
+      labels:
+        - '*'
