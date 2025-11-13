@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.3.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.2.0...v0.3.0) - 2025-11-12
+### Base opentelemetry-collector libraries updates
+- fix(deps): update go.opentelemetry.io/collector to v1.45.0/v0.139.0 by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/40
+### Other changes
+- chore: refine renovate config by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/36
+- docs: add RELEASING.ja.md by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/33
+- chore: upgrade the otelcol library in both dists and components simultaneously by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/41
+- docs: how to use the Mackerel OpenTelemetry Collector by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/42
+- chore: refine CI by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/43
+- chore(deps): update module go.opentelemetry.io/build-tools/multimod to v0.29.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/30
+- chore(deps): update docker/setup-qemu-action action to v3.7.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/44
+- chore(deps): update dependency go to v1.25.4 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/46
+- chore(deps): update golangci/golangci-lint-action action to v9 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/48
+- chore: fix release notes format by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/49
+
 ## [v0.2.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.1.0...v0.2.0) - 2025-10-31
 - chore: use opentelemetry-go-build-tools/multimod for multi-module tagging by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/7
 - feat: implement Zero Config Provider for MDOT Collector by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/8
