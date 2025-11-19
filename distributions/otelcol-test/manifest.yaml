@@ -9,17 +9,17 @@ exporters:
   - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.3.0
 
 processors:
-  - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.139.0
+  - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.140.0
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.139.0
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.140.0
 
 providers:
-  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.45.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.45.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.45.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.45.0
-  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.45.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/envprovider v1.46.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/fileprovider v1.46.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpprovider v1.46.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.46.0
+  - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.46.0
 
 replaces:
   - github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter => ../../../exporter/mackerelotlpexporter
