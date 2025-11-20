@@ -2,9 +2,9 @@ receivers:
   otlp:
     protocols:
       grpc:
-        endpoint: localhost:4317
+        endpoint: otel-collector.test:4317
       http:
-        endpoint: localhost:4318
+        endpoint: otel-collector.test:4318
 processors:
   resourcedetection:
     detectors: [env, system]

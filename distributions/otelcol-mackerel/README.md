@@ -66,6 +66,14 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
              └─30011 /usr/bin/otelcol-mackerel --config=mackerel:default
 ```
 
+## Options
+
+You can modify the config from the default by setting additional environment variables.
+
+| Environment Variable    | Description                                                     |
+| ----------------------- | --------------------------------------------------------------- |
+| `OTELCOL_MACKEREL_HOST` | bind address or hostname for OTLP receiver (default: localhost) |
+
 ## Advanced Usage
 
 You can override the default configuration provided by Mackerel OpenTelemetry Collector.
