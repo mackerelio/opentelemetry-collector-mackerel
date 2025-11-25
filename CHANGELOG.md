@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.4.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.3.0...v0.4.0) - 2025-11-25
+### Base opentelemetry-collector libraries updates
+- fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/50
+### New features/enhancements
+- [otelcol-mackerel] feat: Enable specifying host name to listen on for the OTLP Receiver via env by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/53
+### Other changes
+- chore(deps): update actions/setup-go action to v6.1.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/54
+- chore(deps): update actions/checkout action to v5.0.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/51
+- chore(deps): update actions/checkout action to v6 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/56
+- chore(deps): update actions/create-github-app-token action to v2.2.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/60
+
 ## [v0.3.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.2.0...v0.3.0) - 2025-11-12
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update go.opentelemetry.io/collector to v1.45.0/v0.139.0 by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/40
