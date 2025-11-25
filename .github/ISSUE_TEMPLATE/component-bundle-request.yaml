@@ -1,0 +1,21 @@
+name: "Component Bundle Request for otelcol-mackerel"
+description: Request to bundle a OpenTelemetry Collector component into otelcol-mackerel disto.
+title: "[otelcol-mackerel] Component Bundle Request: <component name>"
+assignees:
+  - "@mackerelio/mackerel-o11y-team"
+body:
+  - type: input
+    id: package
+    attributes:
+      label: Package path of the component
+      description: Please specify the fully qualified Go package path for the OpenTelemetry Collector component you wish to add.
+      placeholder: github.com/open-telemetry/opentelemetry-collector-contrib/processor/foo
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why you need this?
+      description: Please tell us the use cases where you want to use this component in otelcol-mackerel distro.
+    validations:
+      required: false
