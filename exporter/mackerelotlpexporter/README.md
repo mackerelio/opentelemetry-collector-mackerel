@@ -40,3 +40,9 @@ service:
 ```
 
 Set the Mackerel writable API key in the `MACKEREL_APIKEY` environment variable and run the OpenTelemetry Collector.
+
+Or systemd-creds
+
+```sh
+echo $MACKEREL_APIKEY | sudo systemd-creds encrypt --name mackerel-apikey - /etc/credstore.encrypted/mackerel-apikey
+```
