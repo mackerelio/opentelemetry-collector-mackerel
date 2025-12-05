@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.5.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.4.0...v0.5.0) - 2025-12-03
+### Base opentelemetry-collector libraries updates
+- fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/64
+### Other changes
+- chore: remove working-directory input from setup-go because it does not exist by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/63
+- chore(deps): update dependency go to v1.25.5 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/67
+- chore(deps): update actions/checkout action to v6.0.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/66
+- chore(deps): update golangci/golangci-lint-action action to v9.2.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/68
+- chore(deps): update module github.com/goreleaser/goreleaser/v2 to v2.13.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/62
+
 ## [v0.4.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.3.0...v0.4.0) - 2025-11-25
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/50
