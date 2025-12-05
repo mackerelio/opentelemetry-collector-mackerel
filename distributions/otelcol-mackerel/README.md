@@ -30,6 +30,13 @@ $ docker run -e MACKEREL_APIKEY=your_api_key mackerel/otelcol-mackerel:latest
 
 ### Linux (deb Package)
 
+```sh
+curl -fsSL https://mackerel.io/file/script/opentelemetry-collector-mackerel/setup-apt.sh | MACKEREL_APIKEY='<YOUR_API_KEY>' sh
+```
+
+<details>
+<summary>Manual installation</summary>
+
 ```console
 $ # Get the asset URL for the corresponding architecture from the GitHub release page.
 $ sudo apt install https://github.com/mackerelio/opentelemetry-collector-mackerel/releases/download/v0.2.0/otelcol-mackerel_0.2.0_linux_amd64.deb
@@ -47,7 +54,16 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
              └─30011 /usr/bin/otelcol-mackerel --config=mackerel:default
 ```
 
+</details>
+
 ### Linux (rpm Package)
+
+```sh
+curl -fsSL https://mackerel.io/file/script/opentelemetry-collector-mackerel/setup-yum.sh | MACKEREL_APIKEY='<YOUR_API_KEY>' sh
+```
+
+<details>
+<summary>Manual installation</summary>
 
 ```console
 $ # Get the asset URL for the corresponding architecture from the GitHub release page.
@@ -65,6 +81,8 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
      CGroup: /system.slice/otelcol-mackerel.service
              └─30011 /usr/bin/otelcol-mackerel --config=mackerel:default
 ```
+
+</details>
 
 ## Options
 
