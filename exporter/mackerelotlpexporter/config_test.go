@@ -29,8 +29,8 @@ func TestConfig_Validate(t *testing.T) {
 		t.Setenv("MACKEREL_API_KEY", "dummyapikey")
 		assert.NoError(t, cfg.Validate())
 	})
-	t.Run("invalid if no Mackerel API keys are provided", func(t *testing.T) {
+	t.Run("valid if no Mackerel API keys are provided", func(t *testing.T) {
 		cfg := &Config{}
-		assert.Error(t, cfg.Validate())
+		assert.NoError(t, cfg.Validate())
 	})
 }

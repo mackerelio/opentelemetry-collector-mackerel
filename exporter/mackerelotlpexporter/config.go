@@ -30,9 +30,14 @@ func (cfg *Config) Validate() error {
 	if err := cfg.RetryConfig.Validate(); err != nil {
 		return err
 	}
-	if _, err := cfg.mackerelApiKey(); err != nil {
-		return err
-	}
+	// Generally, a deb package should successfully start the service it provides upon installation.
+	// For now, this exporter needs an API key which prevents us from adhering to this rule.
+	//
+	// However, Validate() should not return an error.
+	// If it does, the collector process will exit,
+	// and systemd will then attempt to restart the failed process repeatedly.
+	// In this scenario, since the error cannot be resolved due to the missing API key,
+	// the unit eventually reach its start limit.
 	return nil
 }
 
