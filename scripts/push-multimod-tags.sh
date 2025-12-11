@@ -15,9 +15,9 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
-go tool multimod verify
+go tool -modfile=tool.mod multimod verify
 
-for tag in $(go tool multimod tag -c "$CURRENT_SHA" -m beta -p --print-tags)
+for tag in $(go tool -modfile=tool.mod multimod tag -c "$CURRENT_SHA" -m beta -p --print-tags)
 do
   git push origin "$tag"
 done
