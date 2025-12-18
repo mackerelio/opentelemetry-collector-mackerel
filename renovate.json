@@ -18,6 +18,11 @@
       ],
       "groupName": "opentelemetry-collector upstream dependencies",
       "labels": ["upgrade-otelcol-libs"]
+    },
+    {
+      "matchDatasources": ["golang-version"],
+      "matchFileNames": ["go.mod"],
+      "rangeStrategy": "bump"
     }
   ],
   "postUpdateOptions": ["gomodTidy"]
