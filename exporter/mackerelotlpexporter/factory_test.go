@@ -5,7 +5,9 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"go.opentelemetry.io/collector/component/componenttest"
+	"go.opentelemetry.io/collector/exporter/exporterhelper"
 )
 
 func TestCreateDefaultConfig(t *testing.T) {
@@ -14,4 +16,12 @@ func TestCreateDefaultConfig(t *testing.T) {
 
 	cfg := defaultConfig.(*Config)
 	assert.Equal(t, 10*time.Second, cfg.TimeoutConfig.Timeout)
+
+	queueCfg := cfg.QueueConfig
+	assert.True(t, queueCfg.Enabled)
+
+	batchCfg := queueCfg.Batch.Get()
+	require.NotNil(t, batchCfg)
+	assert.Equal(t, int64(5_000_000), batchCfg.MaxSize)
+	assert.Equal(t, exporterhelper.RequestSizerTypeBytes, batchCfg.Sizer)
 }
