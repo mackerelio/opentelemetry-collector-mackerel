@@ -37,7 +37,7 @@ func createDefaultConfig() component.Config {
 	queueBatchConfig.Sizer = exporterhelper.RequestSizerTypeBytes
 	queueBatchConfig.MaxSize = defaultBatchMaxSizeBytes
 
-	queueConfig.Batch = configoptional.Default(*queueBatchConfig)
+	queueConfig.Batch = configoptional.Some(*queueBatchConfig)
 
 	return &Config{
 		// overrides default exporter timeout config
