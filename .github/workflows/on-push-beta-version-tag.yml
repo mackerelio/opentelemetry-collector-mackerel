@@ -14,9 +14,6 @@ jobs:
       - uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6.1.0
         with:
           go-version-file: go.mod
-          cache-dependency-path: |
-            go.sum
-            tool.sum
       - uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3.7.0
       - uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3.11.1
       - name: Login to Docker Hub
@@ -42,9 +39,7 @@ jobs:
         working-directory: distributions/otelcol-mackerel
       - name: Run GoReleaser
         run: |
-          # goreleaser itself will run on go directive declared in tool.mod
-          # but the artifact, it's otelcol-mackerel here, will build on go version that was setup via setup-go above
-          go tool -modfile=../../tool.mod goreleaser release
+          go tool goreleaser release
         working-directory: distributions/otelcol-mackerel
         env:
           GORELEASER_CURRENT_TAG: ${{ github.ref_name }}
