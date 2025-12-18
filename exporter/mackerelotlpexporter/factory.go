@@ -46,7 +46,7 @@ func createDefaultConfig() component.Config {
 		TimeoutConfig: exporterhelper.TimeoutConfig{
 			Timeout: defaultTimeout,
 		},
-		QueueConfig:     queueConfig,
+		QueueConfig:     configoptional.Default(queueConfig),
 		RetryConfig:     configretry.NewDefaultBackOffConfig(),
 		MetricsEndpoint: defaultMetricsEndpoint,
 		TracesEndpoint:  defaultTracesEndpoint,
