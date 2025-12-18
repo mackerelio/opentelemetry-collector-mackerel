@@ -1,7 +1,7 @@
 # Build with GoReleaser
 # cf.) https://goreleaser.com/customization/dockers_v2/
 
-FROM gcr.io/distroless/base-debian12:nonroot
+FROM gcr.io/distroless/base-debian13:nonroot
 
 ARG TARGETPLATFORM
 
