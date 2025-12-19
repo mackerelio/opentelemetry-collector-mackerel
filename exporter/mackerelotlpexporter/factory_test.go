@@ -17,8 +17,8 @@ func TestCreateDefaultConfig(t *testing.T) {
 	cfg := defaultConfig.(*Config)
 	assert.Equal(t, 10*time.Second, cfg.TimeoutConfig.Timeout)
 
-	queueCfg := cfg.QueueConfig
-	assert.True(t, queueCfg.Enabled)
+	queueCfg := cfg.QueueConfig.Get()
+	require.NotNil(t, queueCfg)
 
 	batchCfg := queueCfg.Batch.Get()
 	require.NotNil(t, batchCfg)
