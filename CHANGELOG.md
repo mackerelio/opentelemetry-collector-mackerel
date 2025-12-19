@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.6.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.5.0...v0.6.0) - 2025-12-19
+### Base opentelemetry-collector libraries updates
+- fix(deps): update go.opentelemetry.io/collector to v1.48.0/v0.142.0  by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/81
+### New features/enhancements
+- fix(deps): Upgrade the container base image to Debian 13 by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/82
+### Other changes
+- docs: Update README with installation instructions by @lufia in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/69
+- chore(deps): update actions/create-github-app-token action to v2.2.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/70
+- chore(deps): update module github.com/goreleaser/goreleaser/v2 to v2.13.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/71
+- chore(deps): update songmu/tagpr action to v1.10.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/75
+- Revert "Merge pull request #74 separate tool directives in go.mod to tool.mod" by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/78
+- fix: fixed the issue where default batch settings of mackerelotlp exporter were not applied by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/79
+
 ## [v0.5.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.4.0...v0.5.0) - 2025-12-03
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/64
