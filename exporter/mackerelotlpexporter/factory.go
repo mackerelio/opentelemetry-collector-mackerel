@@ -14,7 +14,7 @@ import (
 
 const (
 	defaultTimeout           = 10 * time.Second
-	defaultBatchMaxSizeBytes = 5_000_000 // 5MB
+	defaultBatchMaxSizeBytes = 3_500_000 // 3.5MB
 	defaultMetricsEndpoint   = "otlp.mackerelio.com:4317"
 	defaultTracesEndpoint    = "https://otlp-vaxila.mackerelio.com"
 )
@@ -32,7 +32,8 @@ func createDefaultConfig() component.Config {
 	queueConfig := exporterhelper.NewDefaultQueueConfig()
 
 	// overrides default exporter queue batch config
-	// because Vaxila endpoint does not accept requests larger than 6MB.
+	// because Vaxila endpoint does not accept requests larger than 6MB
+	// and Mackerel OTLP/gRPC endpoint does not accept messages larger than 4MB
 	queueBatchConfig := queueConfig.Batch.GetOrInsertDefault()
 	queueBatchConfig.Sizer = exporterhelper.RequestSizerTypeBytes
 	queueBatchConfig.MaxSize = defaultBatchMaxSizeBytes
