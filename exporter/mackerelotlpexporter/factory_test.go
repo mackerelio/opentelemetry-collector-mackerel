@@ -22,6 +22,6 @@ func TestCreateDefaultConfig(t *testing.T) {
 
 	batchCfg := queueCfg.Batch.Get()
 	require.NotNil(t, batchCfg)
-	assert.Equal(t, int64(5_000_000), batchCfg.MaxSize)
+	assert.Equal(t, int64(3_500_000), batchCfg.MaxSize)
 	assert.Equal(t, exporterhelper.RequestSizerTypeBytes, batchCfg.Sizer)
 }
