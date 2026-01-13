@@ -3,6 +3,7 @@ package mackerelotlpexporter
 import (
 	"errors"
 	"os"
+	"path/filepath"
 
 	"go.opentelemetry.io/collector/config/configopaque"
 	"go.opentelemetry.io/collector/config/configoptional"
@@ -45,7 +46,22 @@ func (cfg *Config) mackerelApiKey() (configopaque.String, error) {
 		return configopaque.String(v), nil
 	} else if v := os.Getenv("MACKEREL_API_KEY"); v != "" {
 		return configopaque.String(v), nil
+	} else if v, err := readCredentialFrom("mackerel-apikey"); err == nil {
+		return configopaque.String(v), nil
 	} else {
 		return "", errors.New("Mackerel API key must be specified") //nolint:staticcheck // Mackerel is proper noun
 	}
+}
+
+func readCredentialFrom(name string) (string, error) {
+	dir := os.Getenv("CREDENTIALS_DIRECTORY")
+	if dir == "" {
+		return "", os.ErrNotExist
+	}
+	file := filepath.Join(dir, name)
+	b, err := os.ReadFile(file)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }

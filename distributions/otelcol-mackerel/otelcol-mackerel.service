@@ -3,6 +3,7 @@ Description=Mackerel OpenTelemetry Collector
 After=network.target
 
 [Service]
+LoadCredentialEncrypted=mackerel-apikey
 EnvironmentFile=-/etc/otelcol-mackerel/otelcol-mackerel.conf
 ExecStart=/usr/bin/otelcol-mackerel $OTELCOL_MACKEREL_OPTIONS
 ExecReload=/bin/kill -HUP $MAINPID
