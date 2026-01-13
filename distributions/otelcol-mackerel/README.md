@@ -192,6 +192,7 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | ------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `nop`         | No-op Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                 |
 | `otlp`        | OTLP Receiver         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                |
+| `awsxray`     | AWS X-Ray Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)     |
 | `hostmetrics` | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
 | `httpcheck`   | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
 | `mysql`       | MySQL Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)       |
