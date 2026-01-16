@@ -18,7 +18,8 @@ type configGenerator struct {
 }
 
 type cfgEnvs struct {
-	Host string `env:"OTELCOL_MACKEREL_HOST" envDefault:"localhost"`
+	Host               string   `env:"OTELCOL_MACKEREL_HOST" envDefault:"localhost"`
+	SamplingPercentage *float64 `env:"OTELCOL_MACKEREL_SAMPLING_PERCENTAGE"`
 }
 
 func newConfigGenerator() *configGenerator {
@@ -42,6 +43,9 @@ func (g *configGenerator) Generate() (map[string]any, error) {
 
 	g.addOTLPReceiver()
 	g.addResourceDetectionProcessor()
+	if g.SamplingPercentage != nil {
+		g.addProbabilisticSamplingProcessor()
+	}
 
 	cfg := map[string]any{
 		"receivers":  g.receivers,
@@ -94,6 +98,14 @@ func (g *configGenerator) addResourceDetectionProcessor() {
 	}
 	g.metricsPipelineProcessorIDs.sendingSourceProcessorIDs = append(g.metricsPipelineProcessorIDs.sendingSourceProcessorIDs, id)
 	g.tracesPipelineProcessorIDs.sendingSourceProcessorIDs = append(g.tracesPipelineProcessorIDs.sendingSourceProcessorIDs, id)
+}
+
+func (g *configGenerator) addProbabilisticSamplingProcessor() {
+	const id = "probabilistic_sampler"
+	g.processors[id] = map[string]any{
+		"sampling_percentage": g.SamplingPercentage,
+	}
+	g.tracesPipelineProcessorIDs.samplingProcessorIDs = append(g.tracesPipelineProcessorIDs.samplingProcessorIDs, id)
 }
 
 type processorIDs struct {
