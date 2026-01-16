@@ -12,7 +12,8 @@ import (
 func TestConfigGenerator_Generate(t *testing.T) {
 	t.Run("default config", func(t *testing.T) {
 		g := newConfigGenerator()
-		rawCfg := g.Generate()
+		rawCfg, err := g.Generate()
+		require.NoError(t, err)
 		gotYAMLCfg, err := yaml.Marshal(rawCfg)
 		require.NoError(t, err)
 		wantYAMLCfg, err := os.ReadFile("./testdata/00_default_config.yaml")
@@ -23,7 +24,8 @@ func TestConfigGenerator_Generate(t *testing.T) {
 	t.Run("with OTELCOL_MACKEREL_HOST env", func(t *testing.T) {
 		t.Setenv("OTELCOL_MACKEREL_HOST", "otel-collector.test")
 		g := newConfigGenerator()
-		rawCfg := g.Generate()
+		rawCfg, err := g.Generate()
+		require.NoError(t, err)
 		gotYAMLCfg, err := yaml.Marshal(rawCfg)
 		require.NoError(t, err)
 		wantYAMLCfg, err := os.ReadFile("./testdata/01_with_otelcol_host_config.yaml")

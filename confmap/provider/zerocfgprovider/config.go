@@ -2,11 +2,13 @@ package zerocfgprovider
 
 import (
 	"net"
-	"os"
 	"slices"
+
+	"github.com/caarlos0/env/v11"
 )
 
 type configGenerator struct {
+	*cfgEnvs
 	receivers                   map[string]any
 	processors                  map[string]any
 	metricsPipelineReceiverIDs  []string
@@ -15,8 +17,13 @@ type configGenerator struct {
 	tracesPipelineProcessorIDs  *processorIDs
 }
 
+type cfgEnvs struct {
+	Host string `env:"OTELCOL_MACKEREL_HOST" envDefault:"localhost"`
+}
+
 func newConfigGenerator() *configGenerator {
 	return &configGenerator{
+		cfgEnvs:                     nil,
 		receivers:                   map[string]any{},
 		processors:                  map[string]any{},
 		metricsPipelineReceiverIDs:  []string{},
@@ -26,7 +33,13 @@ func newConfigGenerator() *configGenerator {
 	}
 }
 
-func (g *configGenerator) Generate() map[string]any {
+func (g *configGenerator) Generate() (map[string]any, error) {
+	envs, err := env.ParseAs[cfgEnvs]()
+	if err != nil {
+		return nil, err
+	}
+	g.cfgEnvs = &envs
+
 	g.addOTLPReceiver()
 	g.addResourceDetectionProcessor()
 
@@ -51,22 +64,18 @@ func (g *configGenerator) Generate() map[string]any {
 			},
 		},
 	}
-	return cfg
+	return cfg, nil
 }
 
 func (g *configGenerator) addOTLPReceiver() {
 	const id = "otlp"
-	host := os.Getenv("OTELCOL_MACKEREL_HOST")
-	if host == "" {
-		host = "localhost"
-	}
 	g.receivers[id] = map[string]any{
 		"protocols": map[string]any{
 			"grpc": map[string]any{
-				"endpoint": net.JoinHostPort(host, "4317"),
+				"endpoint": net.JoinHostPort(g.Host, "4317"),
 			},
 			"http": map[string]any{
-				"endpoint": net.JoinHostPort(host, "4318"),
+				"endpoint": net.JoinHostPort(g.Host, "4318"),
 			},
 		},
 	}
