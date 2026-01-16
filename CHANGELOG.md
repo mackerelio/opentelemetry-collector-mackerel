@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.8.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.7.0...v0.8.0) - 2026-01-16
+### New features/enhancements
+- [otelcol-mackerel] feat: configure probabilistic sampling via OTELCOL_MACKEREL_SAMPLING_PERCENTAGE env by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/98
+### Other changes
+- chore(deps): update dependency go to v1.25.6 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/97
+- chore(deps): update songmu/tagpr action to v1.11.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/95
+
 ## [v0.7.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.6.0...v0.7.0) - 2026-01-13
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/90
