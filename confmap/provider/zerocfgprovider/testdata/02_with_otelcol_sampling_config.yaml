@@ -1,0 +1,26 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: localhost:4317
+      http:
+        endpoint: localhost:4318
+processors:
+  resourcedetection:
+    detectors: [env, system]
+    system:
+      hostname_sources: [os]
+  probabilistic_sampler:
+    sampling_percentage: 12.33
+exporters:
+  mackerelotlp:
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [mackerelotlp]
+    traces:
+      receivers: [otlp]
+      processors: [probabilistic_sampler, resourcedetection]
+      exporters: [mackerelotlp]

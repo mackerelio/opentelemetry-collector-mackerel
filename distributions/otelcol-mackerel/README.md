@@ -88,9 +88,10 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
 
 You can modify the config from the default by setting additional environment variables.
 
-| Environment Variable    | Description                                                     |
-| ----------------------- | --------------------------------------------------------------- |
-| `OTELCOL_MACKEREL_HOST` | bind address or hostname for OTLP receiver (default: localhost) |
+| Environment Variable                   | Description                                                     |
+| -------------------------------------- | --------------------------------------------------------------- |
+| `OTELCOL_MACKEREL_HOST`                | bind address or hostname for OTLP receiver (default: localhost) |
+| `OTELCOL_MACKEREL_SAMPLING_PERCENTAGE` | apply probabilistic sampling to the traces at this rate         |
 
 ## Advanced Usage
 

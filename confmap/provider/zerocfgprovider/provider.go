@@ -24,7 +24,10 @@ func (p *provider) Scheme() string {
 
 func (p *provider) Retrieve(_ context.Context, _ string, _ confmap.WatcherFunc) (*confmap.Retrieved, error) {
 	configGenerator := newConfigGenerator()
-	rawCfg := configGenerator.Generate()
+	rawCfg, err := configGenerator.Generate()
+	if err != nil {
+		return nil, err
+	}
 	return confmap.NewRetrieved(rawCfg)
 }
 
