@@ -314,7 +314,7 @@ require (
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/build-tools v0.29.0 // indirect
 	go.opentelemetry.io/build-tools/multimod v0.29.0 // indirect
-	go.opentelemetry.io/collector/cmd/builder v0.143.0 // indirect
+	go.opentelemetry.io/collector/cmd/builder v0.144.0 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.38.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.64.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.64.0 // indirect
@@ -330,7 +330,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	gocloud.dev v0.44.0 // indirect
 	golang.org/x/crypto v0.46.0 // indirect
-	golang.org/x/mod v0.31.0 // indirect
+	golang.org/x/mod v0.32.0 // indirect
 	golang.org/x/net v0.48.0 // indirect
 	golang.org/x/oauth2 v0.34.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
