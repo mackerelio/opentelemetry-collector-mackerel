@@ -1,18 +1,18 @@
-# Mackerel OpenTelemetry Collector
+# Mackerel OpenTelemetry コレクター
 
-🌎 [日本語](./README.ja.md) | English
+🌎 日本語 | [English](./README.md)
 
-This distribution is an OpenTelemetry Collector built for Mackerel users.
+このディストリビューションは Mackerel ユーザーのために作られた OpenTelemetry コレクターのビルドです。
 
-Even if you don't know config file format fof OpenTelemetry Collector, you can start a simple collector with just a few environment variables.
+OpenTelemetry コレクターの設定ファイルのフォーマットが分からなくても、いくつかの環境変数をセットするだけでシンプルな設定のコレクターを起動できます。
 
-## Getting Started
+## はじめかた
 
-You can start a OpenTelemetry Collector that receives telemetry via OTLP on the localhost domain, adds host resource attributes, and exports the data to Mackerel without a complex configuration file. All you need is your Mackerel API key.
+ローカルホスト上で OTLP 経由でテレメトリーを受信し、ホストのリソース属性を追加した上で Mackerel にエクスポートする OpenTelemetry コレクターを複雑な設定ファイルなしで起動できます。必要なのは Mackerel の API キーだけです。
 
 ### Docker
 
-We publish images on Docker Hub and GitHub Container Registry:
+Docker Hub と GitHub Container Registry にてコンテナイメージを配布しています：
 
 - [mackerel/otelcol-mackerel](https://hub.docker.com/r/mackerel/otelcol-mackerel)
 - [ghcr.io/mackerelio/opentelemetry-collector-mackerel/otelcol-mackerel](https://github.com/mackerelio/opentelemetry-collector-mackerel/pkgs/container/opentelemetry-collector-mackerel%2Fotelcol-mackerel)
@@ -30,17 +30,17 @@ $ docker run -e MACKEREL_APIKEY=your_api_key mackerel/otelcol-mackerel:latest
 2025-11-04T13:13:41.246Z        info    service@v0.138.0/service.go:245 Everything is ready. Begin running and processing data. {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}}
 ```
 
-### Linux (deb Package)
+### Linux (deb パッケージ)
 
 ```sh
 curl -fsSL https://mackerel.io/file/script/opentelemetry-collector-mackerel/setup-apt.sh | MACKEREL_APIKEY='<YOUR_API_KEY>' sh
 ```
 
 <details>
-<summary>Manual installation</summary>
+<summary>マニュアルインストール</summary>
 
 ```console
-$ # Get the asset URL for the corresponding architecture from the GitHub release page.
+$ # GitHubのリリースページから対応するアーキテクチャのasset URLを入手してください
 $ sudo apt install https://github.com/mackerelio/opentelemetry-collector-mackerel/releases/download/v0.2.0/otelcol-mackerel_0.2.0_linux_amd64.deb
 $ echo "MACKEREL_APIKEY=your_api_key" | sudo tee -a /etc/otelcol-mackerel/otelcol-mackerel.conf
 $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
@@ -58,17 +58,17 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
 
 </details>
 
-### Linux (rpm Package)
+### Linux (rpm パッケージ)
 
 ```sh
 curl -fsSL https://mackerel.io/file/script/opentelemetry-collector-mackerel/setup-yum.sh | MACKEREL_APIKEY='<YOUR_API_KEY>' sh
 ```
 
 <details>
-<summary>Manual installation</summary>
+<summary>マニュアルインストール</summary>
 
 ```console
-$ # Get the asset URL for the corresponding architecture from the GitHub release page.
+$ # GitHubのリリースページから対応するアーキテクチャのasset URLを入手してください
 $ sudo apt install https://github.com/mackerelio/opentelemetry-collector-mackerel/releases/download/v0.2.0/otelcol-mackerel_0.2.0_linux_amd64.rpm
 $ echo "MACKEREL_APIKEY=your_api_key" | sudo tee -a /etc/otelcol-mackerel/otelcol-mackerel.conf
 $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
@@ -86,18 +86,18 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
 
 </details>
 
-## Options
+## 追加設定
 
-You can modify the config from the default by setting additional environment variables.
+追加の環境変数をセットすることでデフォルトの設定を変更することができます。
 
-| Environment Variable                   | Description                                                     |
-| -------------------------------------- | --------------------------------------------------------------- |
-| `OTELCOL_MACKEREL_HOST`                | bind address or hostname for OTLP receiver (default: localhost) |
-| `OTELCOL_MACKEREL_SAMPLING_PERCENTAGE` | apply probabilistic sampling to the traces at this rate         |
+| 環境変数                               | 説明                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------- |
+| `OTELCOL_MACKEREL_HOST`                | OTLP レシーバーが受信する IP アドレスやホスト名 (デフォルト値: localhost) |
+| `OTELCOL_MACKEREL_SAMPLING_PERCENTAGE` | 指定したパーセンテージでトレースに確率的サンプリングを適用します          |
 
-## Advanced Usage
+## 高度な使い方
 
-You can override the default configuration provided by Mackerel OpenTelemetry Collector.
+Mackerel OpenTelemetry コレクターが提供するデフォルト設定を上書きして、標準の方法で設定を記述することもできます。
 
 ### Docker
 
@@ -158,15 +158,15 @@ $ sudo vim /etc/otelcol-mackerel/otelcol-mackerel.conf
 $ sudo systemctl restart otelcol-mackerel.service
 ```
 
-## Components
+## コンポーネント
 
-We have selected components provided from the OpenTelemetry community that are particularly beneficial.
+OpenTelemetry コミュニティが提供する OpenTelemetry コレクターコンポーネントの中から、特に有用なものをいくつか選択してバンドルしています。
 
-If you are a Mackerel user and would like to add OpenTelemetry Collector components to this distribution, please let us know by opening an issue.
+もし Mackerel ユーザーの方でこのディストリビューションに追加してほしいコンポーネントがあれば、GitHub で Issue を開いてリクエストしてください。
 
-### Exporters
+### エクスポーター
 
-| Component      | Description            | Document                                                                                                           |
+| コンポーネント | 説明                   | ドキュメント                                                                                                       |
 | -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `debug`        | Debug Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter)             |
 | `nop`          | No-op Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter)               |
@@ -174,9 +174,9 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | `otlphttp`     | OTLP/HTTP Exporter     | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter)          |
 | `mackerelotlp` | Mackerel OTLP Exporter | [Document](https://github.com/mackerelio/opentelemetry-collector-mackerel/tree/main/exporter/mackerelotlpexporter) |
 
-### Processors
+### プロセッサー
 
-| Component               | Description                      | Document                                                                                                                        |
+| コンポーネント          | 説明                             | ドキュメント                                                                                                                    |
 | ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `batch`                 | Batch Processor                  | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor)                        |
 | `memory_limiter`        | Memory Limiter Processor         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor)                |
@@ -189,23 +189,23 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | `tail_sampling`         | Tail Sampling Processor          | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)         |
 | `transform`             | Transform Processor              | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/transformprocessor/README.md)  |
 
-### Receivers
+### レシーバー
 
-| Component     | Description           | Document                                                                                                             |
-| ------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `nop`         | No-op Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                 |
-| `otlp`        | OTLP Receiver         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                |
-| `awsxray`     | AWS X-Ray Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)     |
-| `hostmetrics` | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
-| `httpcheck`   | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
-| `mysql`       | MySQL Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)       |
-| `oracledb`    | Oracle DB Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/oracledbreceiver)    |
-| `postgresql`  | PostgreSQL Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/postgresqlreceiver)  |
-| `redis`       | Redis Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/redisreceiver)       |
+| コンポーネント | 説明                  | ドキュメント                                                                                                         |
+| -------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `nop`          | No-op Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                 |
+| `otlp`         | OTLP Receiver         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                |
+| `awsxray`      | AWS X-Ray Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)     |
+| `hostmetrics`  | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
+| `httpcheck`    | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
+| `mysql`        | MySQL Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)       |
+| `oracledb`     | Oracle DB Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/oracledbreceiver)    |
+| `postgresql`   | PostgreSQL Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/postgresqlreceiver)  |
+| `redis`        | Redis Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/redisreceiver)       |
 
-### Connectors
+### コネクター
 
-| Component      | Description             | Document                                                                                                                |
+| コンポーネント | 説明                    | ドキュメント                                                                                                            |
 | -------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `routing`      | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
 | `servicegraph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |

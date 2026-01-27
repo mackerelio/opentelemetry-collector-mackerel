@@ -1,5 +1,7 @@
 # Mackerel Distro of OpenTelemetry (MDOT) Collector
 
+🌎 [日本語](./README.ja.md) | English
+
 [Mackerel](https://mackerel.io/) is a monitoring and observability platform. We provide the distributions of the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/).
 
 > [!NOTE]
