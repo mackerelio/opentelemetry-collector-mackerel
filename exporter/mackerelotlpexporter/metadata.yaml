@@ -1,4 +1,4 @@
-type: mackerelotlp
+type: mackerel_otlp
 github_project: mackerelio/opentelemetry-collector-mackerel
 
 status:
