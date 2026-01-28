@@ -11,14 +11,14 @@ processors:
     system:
       hostname_sources: [os]
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 service:
   pipelines:
     metrics:
       receivers: [otlp]
       processors: [resourcedetection]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
       processors: [resourcedetection]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]

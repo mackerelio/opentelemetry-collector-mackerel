@@ -13,14 +13,14 @@ processors:
   probabilistic_sampler:
     sampling_percentage: 12.33
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 service:
   pipelines:
     metrics:
       receivers: [otlp]
       processors: [resourcedetection]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
       processors: [probabilistic_sampler, resourcedetection]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
