@@ -14,8 +14,11 @@ Pass the following configuration to the OpenTelemetry Collector bundled with the
 
 ```yaml
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 ```
+
+> [!WARNING]
+> As of v0.9.0, the component type name has been changed from `mackerelotlp` to `mackerel_otlp` to follow with the [naming convention](https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/coding-guidelines.md). Although the deprecated name is still supported as an alias, it may be removed in a future release.
 
 Here is an example of the whole settings:
 
@@ -27,16 +30,16 @@ receivers:
       http:
 
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 
 service:
   pipelines:
     metrics:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
 ```
 
 Set the Mackerel writable API key in the `MACKEREL_APIKEY` environment variable and run the OpenTelemetry Collector.

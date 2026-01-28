@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	Type      = component.MustNewType("mackerelotlp")
+	Type      = component.MustNewType("mackerel_otlp")
 	ScopeName = "github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter"
 )
 
