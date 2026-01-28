@@ -52,5 +52,6 @@ func createDefaultConfig() component.Config {
 		RetryConfig:     configretry.NewDefaultBackOffConfig(),
 		MetricsEndpoint: defaultMetricsEndpoint,
 		TracesEndpoint:  defaultTracesEndpoint,
+		InSecure:        false,
 	}
 }

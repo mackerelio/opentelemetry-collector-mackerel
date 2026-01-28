@@ -42,6 +42,7 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	}
 	otlpCfg.ClientConfig.Endpoint = mackerelOTLPCfg.MetricsEndpoint
 	otlpCfg.ClientConfig.Compression = "gzip"
+	otlpCfg.ClientConfig.TLS.Insecure = mackerelOTLPCfg.InSecure
 
 	exp, err := factory.CreateMetrics(ctx, otlpSet, otlpCfg)
 	if err != nil {
@@ -82,6 +83,7 @@ func createTraces(ctx context.Context, set exporter.Settings, cfg component.Conf
 	}
 	otlpHTTPCfg.ClientConfig.Endpoint = mackerelOTLPCfg.TracesEndpoint
 	otlpHTTPCfg.ClientConfig.Compression = "gzip"
+	otlpHTTPCfg.ClientConfig.TLS.Insecure = mackerelOTLPCfg.InSecure
 
 	exp, err := factory.CreateTraces(ctx, otlpHTTPSet, otlpHTTPCfg)
 	if err != nil {

@@ -19,6 +19,8 @@ type Config struct {
 	MetricsEndpoint string `mapstructure:"metrics_endpoint"`
 	// TracesEndpoint configurations are provided for testing purposes and may be modified or deprecated.
 	TracesEndpoint string `mapstructure:"traces_endpoint"`
+	// InSecure configurations are provided for testing purposes and may be modified or deprecated.
+	InSecure bool `mapstructure:"insecure"`
 }
 
 func (cfg *Config) Validate() error {
