@@ -51,19 +51,19 @@ func (g *configGenerator) Generate() (map[string]any, error) {
 		"receivers":  g.receivers,
 		"processors": g.processors,
 		"exporters": map[string]any{
-			"mackerelotlp": nil,
+			"mackerel_otlp": nil,
 		},
 		"service": map[string]any{
 			"pipelines": map[string]any{
 				"metrics": map[string]any{
 					"receivers":  g.metricsPipelineReceiverIDs,
 					"processors": g.metricsPipelineProcessorIDs.GeneratePipeline(),
-					"exporters":  []string{"mackerelotlp"},
+					"exporters":  []string{"mackerel_otlp"},
 				},
 				"traces": map[string]any{
 					"receivers":  g.tracesPipelineReceiverIDs,
 					"processors": g.tracesPipelineProcessorIDs.GeneratePipeline(),
-					"exporters":  []string{"mackerelotlp"},
+					"exporters":  []string{"mackerel_otlp"},
 				},
 			},
 		},

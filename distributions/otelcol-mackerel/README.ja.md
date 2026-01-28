@@ -19,8 +19,8 @@ Docker Hub と GitHub Container Registry にてコンテナイメージを配布
 
 ```
 $ docker run -e MACKEREL_APIKEY=your_api_key mackerel/otelcol-mackerel:latest
-2025-11-04T13:13:41.242Z        info    builders/builders.go:26 Development component. May change in the future.        {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "mackerelotlp", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics"}
-2025-11-04T13:13:41.243Z        info    builders/builders.go:26 Development component. May change in the future.        {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "mackerelotlp", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
+2025-11-04T13:13:41.242Z        info    builders/builders.go:26 Development component. May change in the future.        {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "mackerel_otlp", "otelcol.component.kind": "exporter", "otelcol.signal": "metrics"}
+2025-11-04T13:13:41.243Z        info    builders/builders.go:26 Development component. May change in the future.        {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "mackerel_otlp", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
 2025-11-04T13:13:41.244Z        info    service@v0.138.0/service.go:222 Starting otelcol-mackerel...    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "Version": "0.2.0", "NumCPU": 14}
 2025-11-04T13:13:41.244Z        info    extensions/extensions.go:41     Starting extensions...  {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}}
 2025-11-04T13:13:41.245Z        info    internal/resourcedetection.go:137       began detecting resource information    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "resourcedetection", "otelcol.component.kind": "processor", "otelcol.pipeline.id": "metrics", "otelcol.signal": "metrics"}
@@ -110,16 +110,16 @@ receivers:
       http:
 
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 
 service:
   pipelines:
     metrics:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml validate
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml
 ```
@@ -135,16 +135,16 @@ receivers:
       http:
 
 exporters:
-  mackerelotlp:
+  mackerel_otlp:
 
 service:
   pipelines:
     metrics:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
-      exporters: [mackerelotlp]
+      exporters: [mackerel_otlp]
 $ MACKEREL_APIKEY="your_api_key" otelcol-mackerel --config=/etc/otelcol-mackerel/config.yaml validate
 $ sudo vim /etc/otelcol-mackerel/otelcol-mackerel.conf
 ```
@@ -166,13 +166,13 @@ OpenTelemetry コミュニティが提供する OpenTelemetry コレクターコ
 
 ### エクスポーター
 
-| コンポーネント | 説明                   | ドキュメント                                                                                                       |
-| -------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `debug`        | Debug Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter)             |
-| `nop`          | No-op Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter)               |
-| `otlp`         | OTLP/gRPC Exporter     | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter)              |
-| `otlphttp`     | OTLP/HTTP Exporter     | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter)          |
-| `mackerelotlp` | Mackerel OTLP Exporter | [Document](https://github.com/mackerelio/opentelemetry-collector-mackerel/tree/main/exporter/mackerelotlpexporter) |
+| コンポーネント                          | 説明                   | ドキュメント                                                                                                       |
+| --------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `debug`                                 | Debug Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter)             |
+| `nop`                                   | No-op Exporter         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter)               |
+| `otlp_grpc` (alias: `otlp`)             | OTLP/gRPC Exporter     | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter)              |
+| `otlp_http` (alias: `otlphttp`)         | OTLP/HTTP Exporter     | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter)          |
+| `mackerel_otlp` (alias: `mackerelotlp`) | Mackerel OTLP Exporter | [Document](https://github.com/mackerelio/opentelemetry-collector-mackerel/tree/main/exporter/mackerelotlpexporter) |
 
 ### プロセッサー
 
