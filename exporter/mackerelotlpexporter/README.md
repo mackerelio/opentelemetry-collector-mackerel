@@ -52,10 +52,7 @@ Set the Mackerel writable API key in the `MACKEREL_APIKEY` environment variable 
 
 You can additionally set the following configurations:
 
-`mackerel_api_key`: Mackerel API key (use this if you want to specify this key via a method other than environment variables)
-
-`timeout`: [Timeout configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#timeout)
-
-`sending_queue`: [Sending queue configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#sending-queue)
-
-`retry_on_failure`: [Retry-on-failure configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#retry-on-failure)
+- `mackerel_api_key`: Mackerel API key (use this if you want to specify this key via a method other than environment variables)
+- `timeout`: [Timeout configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#timeout)
+- `sending_queue`: [Sending queue configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#sending-queue)
+- `retry_on_failure`: [Retry-on-failure configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#retry-on-failure)
