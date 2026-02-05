@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.10.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.9.0...v0.10.0) - 2026-02-05
+### Base opentelemetry-collector libraries updates
+- fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/112
+### Other changes
+- chore(deps): update docker/login-action action to v3.7.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/109
+- [mackerelotlpexporter] docs: refine README.md by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/107
+- [mackerelotlpexporter] test: add export testing with test servers by @Arthur1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/108
+- chore(deps): update dependency go to v1.25.7 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/113
+- chore(deps): update songmu/tagpr action to v1.15.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/111
+
 ## [v0.9.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.8.0...v0.9.0) - 2026-01-28
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/100
