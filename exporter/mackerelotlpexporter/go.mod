@@ -18,7 +18,7 @@ require (
 	go.opentelemetry.io/collector/exporter/xexporter v0.145.0
 	go.opentelemetry.io/collector/pdata v1.51.0
 	go.uber.org/goleak v1.3.0
-	google.golang.org/grpc v1.78.0
+	google.golang.org/grpc v1.79.1
 )
 
 require (
