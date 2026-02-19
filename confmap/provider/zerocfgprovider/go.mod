@@ -1,11 +1,11 @@
 module github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/stretchr/testify v1.11.1
-	go.opentelemetry.io/collector/confmap v1.51.0
+	go.opentelemetry.io/collector/confmap v1.52.0
 	go.yaml.in/yaml/v3 v3.0.4
 )
 
@@ -33,7 +33,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
-	go.opentelemetry.io/collector/featuregate v1.51.0 // indirect
+	go.opentelemetry.io/collector/featuregate v1.52.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	golang.org/x/sys v0.33.0 // indirect
