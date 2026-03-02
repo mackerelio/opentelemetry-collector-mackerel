@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.12.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.11.0...v0.12.0) - 2026-03-02
+### Base opentelemetry-collector libraries updates
+- fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/123
+### Other changes
+- fix(deps): update module github.com/caarlos0/env/v11 to v11.4.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/120
+- chore(deps): update songmu/tagpr action to v1.17.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/121
+- chore(deps): update actions/setup-go action to v6.3.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/122
+- chore(deps): update module github.com/goreleaser/goreleaser/v2 to v2.14.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/119
+
 ## [v0.11.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.10.0...v0.11.0) - 2026-02-19
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/117
