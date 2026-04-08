@@ -633,8 +633,8 @@ github.com/knadh/koanf/providers/file v1.2.1 h1:bEWbtQwYrA+W2DtdBrQWyXqJaJSG3KrP
 github.com/knadh/koanf/providers/file v1.2.1/go.mod h1:bp1PM5f83Q+TOUu10J/0ApLBd9uIzg+n9UgthfY+nRA=
 github.com/knadh/koanf/providers/fs v1.0.0 h1:tvn4MrduLgdOSUqqEHULUuIcELXf6xDOpH8GUErpYaY=
 github.com/knadh/koanf/providers/fs v1.0.0/go.mod h1:FksHET+xXFNDozvj8ZCdom54OnZ6eGKJtC5FhZJKx/8=
-github.com/knadh/koanf/v2 v2.3.3 h1:jLJC8XCRfLC7n4F+ZKKdBsbq1bfXTpuFhf4L7t94D94=
-github.com/knadh/koanf/v2 v2.3.3/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
+github.com/knadh/koanf/v2 v2.3.4 h1:fnynNSDlujWE+v83hAp8wKr/cdoxHLO0629SN+U8Urc=
+github.com/knadh/koanf/v2 v2.3.4/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
@@ -923,8 +923,8 @@ go.opentelemetry.io/build-tools v0.29.0 h1:dG1zmHKYTMsP0zGT34+32/U+YR+lcJ8kka7Lc
 go.opentelemetry.io/build-tools v0.29.0/go.mod h1:jTzBit47RqVApCwStu9qw2TfGqR2Fhu5jinLHqfhghQ=
 go.opentelemetry.io/build-tools/multimod v0.29.0 h1:hVXibTuNuJumtn3cpzqPOX2xmcO+KogKZcB0yygHux0=
 go.opentelemetry.io/build-tools/multimod v0.29.0/go.mod h1:tx762Z6RQe5Twkd04q1zzpmGQGtSljbKRy/P61EnJpo=
-go.opentelemetry.io/collector/cmd/builder v0.148.0 h1:a8mxjU7wyD1Qh9lj0UEfsNRL1/S1/yRDFuGkHIGlwbk=
-go.opentelemetry.io/collector/cmd/builder v0.148.0/go.mod h1:pFwU1tJbcpfD+K37IsTboMQ5jsgPBj8nhtkXpO+1WLE=
+go.opentelemetry.io/collector/cmd/builder v0.149.0 h1:ITeN3IiQT6Kiqc+Mo7M40Uh3B3yVhKOfugEiV9osauQ=
+go.opentelemetry.io/collector/cmd/builder v0.149.0/go.mod h1:ElmxpyeQW5fQSZAG5WnLfsKustgglJcI1SPlJRjLQxg=
 go.opentelemetry.io/contrib/bridges/prometheus v0.63.0 h1:/Rij/t18Y7rUayNg7Id6rPrEnHgorxYabm2E6wUdPP4=
 go.opentelemetry.io/contrib/bridges/prometheus v0.63.0/go.mod h1:AdyDPn6pkbkt2w01n3BubRVk7xAsCRq1Yg1mpfyA/0E=
 go.opentelemetry.io/contrib/detectors/gcp v1.39.0 h1:kWRNZMsfBHZ+uHjiH4y7Etn2FK26LAGkNFw7RHv1DhE=
