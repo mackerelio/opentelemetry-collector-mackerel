@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.14.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.13.0...v0.14.0) - 2026-04-08
+### Base opentelemetry-collector libraries updates
+- fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/138
+### Other changes
+- chore(deps): update songmu/tagpr action to v1.18.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/141
+- chore(deps): update actions/setup-go action to v6.4.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/136
+- chore(deps): update module github.com/goreleaser/goreleaser/v2 to v2.15.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/137
+- chore(deps): update docker/login-action action to v4.1.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/140
+- fix(deps): update module google.golang.org/grpc to v1.80.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/139
+- chore(deps): update dependency go to v1.26.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/142
+
 ## [v0.13.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.12.0...v0.13.0) - 2026-03-18
 ### Base opentelemetry-collector libraries updates
 - fix(deps): update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/135
