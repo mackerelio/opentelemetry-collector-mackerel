@@ -15,6 +15,8 @@ type configGenerator struct {
 	metricsPipelineProcessorIDs *processorIDs
 	tracesPipelineReceiverIDs   []string
 	tracesPipelineProcessorIDs  *processorIDs
+	logsPipelineReceiverIDs   []string
+	logsPipelineProcessorIDs  *processorIDs
 }
 
 type cfgEnvs struct {
@@ -31,6 +33,8 @@ func newConfigGenerator() *configGenerator {
 		metricsPipelineProcessorIDs: &processorIDs{},
 		tracesPipelineReceiverIDs:   []string{},
 		tracesPipelineProcessorIDs:  &processorIDs{},
+		logsPipelineReceiverIDs:   []string{},
+		logsPipelineProcessorIDs:  &processorIDs{},
 	}
 }
 
@@ -65,6 +69,11 @@ func (g *configGenerator) Generate() (map[string]any, error) {
 					"processors": g.tracesPipelineProcessorIDs.GeneratePipeline(),
 					"exporters":  []string{"mackerel_otlp"},
 				},
+				"logs": map[string]any{
+					"receivers":  g.logsPipelineReceiverIDs,
+					"processors": g.logsPipelineProcessorIDs.GeneratePipeline(),
+					"exporters":  []string{"mackerel_otlp"},
+				},
 			},
 		},
 	}
@@ -85,6 +94,7 @@ func (g *configGenerator) addOTLPReceiver() {
 	}
 	g.metricsPipelineReceiverIDs = append(g.metricsPipelineReceiverIDs, id)
 	g.tracesPipelineReceiverIDs = append(g.tracesPipelineReceiverIDs, id)
+	g.logsPipelineReceiverIDs = append(g.logsPipelineReceiverIDs, id)
 }
 
 func (g *configGenerator) addResourceDetectionProcessor() {
@@ -98,6 +108,7 @@ func (g *configGenerator) addResourceDetectionProcessor() {
 	}
 	g.metricsPipelineProcessorIDs.sendingSourceProcessorIDs = append(g.metricsPipelineProcessorIDs.sendingSourceProcessorIDs, id)
 	g.tracesPipelineProcessorIDs.sendingSourceProcessorIDs = append(g.tracesPipelineProcessorIDs.sendingSourceProcessorIDs, id)
+	g.logsPipelineProcessorIDs.sendingSourceProcessorIDs = append(g.logsPipelineProcessorIDs.sendingSourceProcessorIDs, id)
 }
 
 func (g *configGenerator) addProbabilisticSamplingProcessor() {

@@ -44,6 +44,9 @@ service:
     traces:
       receivers: [otlp]
       exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
 ```
 
 `MACKEREL_APIKEY`環境変数にMackerelのAPIキー（書き込み可能）をセットしてからコレクターを起動してください。

@@ -22,3 +22,7 @@ service:
       receivers: [otlp]
       processors: [resourcedetection]
       exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      processors: [resourcedetection]
+      exporters: [mackerel_otlp]

@@ -5,7 +5,7 @@ status:
   disable_codecov_badge: true
   class: exporter
   stability:
-    development: [traces, metrics]
+    development: [traces, metrics, logs]
   distributions: []
 
 tests:
@@ -13,3 +13,4 @@ tests:
     mackerel_api_key: "dummy-api-key"
     metrics_endpoint: "example.invalid"
     traces_endpoint: "https://example.invalid"
+    logs_endpoint: "https://example.invalid"

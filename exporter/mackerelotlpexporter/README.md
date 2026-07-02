@@ -44,6 +44,9 @@ service:
     traces:
       receivers: [otlp]
       exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
 ```
 
 Set the Mackerel writable API key in the `MACKEREL_APIKEY` environment variable and run the OpenTelemetry Collector.
