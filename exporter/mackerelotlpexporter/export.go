@@ -3,6 +3,9 @@ package mackerelotlpexporter
 import (
 	"context"
 	"errors"
+	"fmt"
+	"net"
+	"os"
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/config/configopaque"
@@ -40,7 +43,18 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	otlpCfg.ClientConfig.Headers = configopaque.MapList{
 		{Name: "Mackerel-Api-Key", Value: mackerelApiKey},
 	}
-	otlpCfg.ClientConfig.Endpoint = mackerelOTLPCfg.MetricsEndpoint
+	metricsEndpoint := mackerelOTLPCfg.MetricsEndpoint
+	if os.Getenv("OTELCOL_MACKEREL_PREFER_IPV4") != "" {
+		resolved, originalHost, err := resolveIPv4(ctx, metricsEndpoint)
+		if err != nil {
+			return nil, err
+		}
+		metricsEndpoint = resolved
+		if originalHost != "" {
+			otlpCfg.ClientConfig.TLS.ServerName = originalHost
+		}
+	}
+	otlpCfg.ClientConfig.Endpoint = metricsEndpoint
 	otlpCfg.ClientConfig.Compression = "gzip"
 	otlpCfg.ClientConfig.TLS.Insecure = mackerelOTLPCfg.InSecure
 
@@ -90,4 +104,25 @@ func createTraces(ctx context.Context, set exporter.Settings, cfg component.Conf
 		return nil, err
 	}
 	return exp, nil
+}
+
+// resolveIPv4 resolves the host in endpoint to an IPv4 address.
+// Returns the resolved endpoint and the original hostname.
+// If the host is already an IP address, it returns the endpoint unchanged.
+func resolveIPv4(ctx context.Context, endpoint string) (string, string, error) {
+	host, port, err := net.SplitHostPort(endpoint)
+	if err != nil {
+		return endpoint, "", nil
+	}
+	if net.ParseIP(host) != nil {
+		return endpoint, "", nil
+	}
+	ips, err := net.DefaultResolver.LookupIP(ctx, "ip4", host)
+	if err != nil {
+		return "", "", fmt.Errorf("resolve %s to IPv4: %w", host, err)
+	}
+	if len(ips) == 0 {
+		return "", "", fmt.Errorf("no IPv4 address found for %s", host)
+	}
+	return net.JoinHostPort(ips[0].String(), port), host, nil
 }
