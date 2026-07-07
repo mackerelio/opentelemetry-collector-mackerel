@@ -120,6 +120,9 @@ service:
     traces:
       receivers: [otlp]
       exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml validate
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml
 ```
@@ -143,6 +146,9 @@ service:
       receivers: [otlp]
       exporters: [mackerel_otlp]
     traces:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    logs:
       receivers: [otlp]
       exporters: [mackerel_otlp]
 $ MACKEREL_APIKEY="your_api_key" otelcol-mackerel --config=/etc/otelcol-mackerel/config.yaml validate

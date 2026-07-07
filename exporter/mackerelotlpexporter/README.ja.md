@@ -2,13 +2,13 @@
 
 🌎 日本語 | [English](./README.md)
 
-OTLP（OpenTelemetry Protocol）を使用して、OpenTelemetryコレクターからメトリックやトレースをMackerelに投稿するためのエクスポーターです。
+OTLP（OpenTelemetry Protocol）を使用して、OpenTelemetryコレクターからメトリック・トレース・ログをMackerelに投稿するためのエクスポーターです。
 
 MackerelはOTLPをネイティブサポートしており、OpenTelemetryコミュニティが提供する[OTLP gRPC Exporter](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter)や[OTLP HTTP Exporter](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlphttpexporter)を使用してテレメトリーを投稿することができます。
 
 しかし、Mackerelはテレメトリーの種類ごと異なるエンドポイント・異なるOTLPのトランスポート種別を使用しています。複数のエクスポーターを併用する必要があり、手間がかかります。
 
-Mackerel OTLP エクスポーターを使用することで、一つのエクスポーターでトレースもメトリックも投稿することができます。
+Mackerel OTLP エクスポーターを使用することで、一つのエクスポーターでメトリック・トレース・ログを投稿することができます。
 
 また、Mackerelの仕様に合わせて適切なタイムアウトやバッチの設定をデフォルトで適用します。パイプラインに[Batch Processor](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor)を入れる必要がありません。
 
