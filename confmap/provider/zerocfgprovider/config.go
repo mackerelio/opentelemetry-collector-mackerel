@@ -88,7 +88,7 @@ func (g *configGenerator) addOTLPReceiver() {
 }
 
 func (g *configGenerator) addResourceDetectionProcessor() {
-	const id = "resourcedetection"
+	const id = "resource_detection"
 	g.processors[id] = map[string]any{
 		// TODO: adapt settings for specific environments such as cloud and container environments
 		"detectors": []string{"env", "system"},
