@@ -6,7 +6,7 @@ receivers:
       http:
         endpoint: localhost:4318
 processors:
-  resourcedetection:
+  resource_detection:
     detectors: [env, system]
     system:
       hostname_sources: [os]
@@ -18,9 +18,13 @@ service:
   pipelines:
     metrics:
       receivers: [otlp]
-      processors: [resourcedetection]
+      processors: [resource_detection]
       exporters: [mackerel_otlp]
     traces:
       receivers: [otlp]
-      processors: [probabilistic_sampler, resourcedetection]
+      processors: [probabilistic_sampler, resource_detection]
+      exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      processors: [resourcedetection]
       exporters: [mackerel_otlp]

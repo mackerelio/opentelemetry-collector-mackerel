@@ -23,8 +23,8 @@ $ docker run -e MACKEREL_APIKEY=your_api_key mackerel/otelcol-mackerel:latest
 2025-11-04T13:13:41.243Z        info    builders/builders.go:26 Development component. May change in the future.        {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "mackerel_otlp", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}
 2025-11-04T13:13:41.244Z        info    service@v0.138.0/service.go:222 Starting otelcol-mackerel...    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "Version": "0.2.0", "NumCPU": 14}
 2025-11-04T13:13:41.244Z        info    extensions/extensions.go:41     Starting extensions...  {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}}
-2025-11-04T13:13:41.245Z        info    internal/resourcedetection.go:137       began detecting resource information    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "resourcedetection", "otelcol.component.kind": "processor", "otelcol.pipeline.id": "metrics", "otelcol.signal": "metrics"}
-2025-11-04T13:13:41.246Z        info    internal/resourcedetection.go:188       detected resource information   {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "resourcedetection", "otelcol.component.kind": "processor", "otelcol.pipeline.id": "metrics", "otelcol.signal": "metrics", "resource": {"host.name":"2bbb1dcc8491","os.type":"linux"}}
+2025-11-04T13:13:41.245Z        info    internal/resourcedetection.go:137       began detecting resource information    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "resource_detection", "otelcol.component.kind": "processor", "otelcol.pipeline.id": "metrics", "otelcol.signal": "metrics"}
+2025-11-04T13:13:41.246Z        info    internal/resourcedetection.go:188       detected resource information   {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "resource_detection", "otelcol.component.kind": "processor", "otelcol.pipeline.id": "metrics", "otelcol.signal": "metrics", "resource": {"host.name":"2bbb1dcc8491","os.type":"linux"}}
 2025-11-04T13:13:41.246Z        info    otlpreceiver@v0.138.0/otlp.go:121       Starting GRPC server    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "127.0.0.1:4317"}
 2025-11-04T13:13:41.246Z        info    otlpreceiver@v0.138.0/otlp.go:179       Starting HTTP server    {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "127.0.0.1:4318"}
 2025-11-04T13:13:41.246Z        info    service@v0.138.0/service.go:245 Everything is ready. Begin running and processing data. {"resource": {"service.instance.id": "ec2e6d20-2fb6-4017-b21e-cea7a01df4d7", "service.name": "otelcol-mackerel", "service.version": "0.2.0"}}
@@ -120,6 +120,9 @@ service:
     traces:
       receivers: [otlp]
       exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml validate
 $ docker run -e MACKEREL_APIKEY=your_api_key --mount type=bind,src=./config.yaml,dst=/home/nonroot/config.yaml mackerel/otelcol-mackerel:latest --config /home/nonroot/config.yaml
 ```
@@ -143,6 +146,9 @@ service:
       receivers: [otlp]
       exporters: [mackerel_otlp]
     traces:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    logs:
       receivers: [otlp]
       exporters: [mackerel_otlp]
 $ MACKEREL_APIKEY="your_api_key" otelcol-mackerel --config=/etc/otelcol-mackerel/config.yaml validate
@@ -183,7 +189,7 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | `attributes`            | Attributes Processor             | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor)           |
 | `filter`                | Filter Processor                 | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/filterprocessor)               |
 | `probabilistic_sampler` | Probabilistic Sampling Processor | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/probabilisticsamplerprocessor) |
-| `resourcedetection`     | Resource Detection Processor     | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor)    |
+| `resource_detection`     | Resource Detection Processor     | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor)    |
 | `resource`              | Resource Processor               | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourceprocessor)             |
 | `span`                  | Span Processor                   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanprocessor)                 |
 | `tail_sampling`         | Tail Sampling Processor          | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)         |
@@ -196,8 +202,8 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | `nop`         | No-op Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                 |
 | `otlp`        | OTLP Receiver         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                |
 | `awsxray`     | AWS X-Ray Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)     |
-| `hostmetrics` | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
-| `httpcheck`   | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
+| `host_metrics` | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
+| `http_check`   | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
 | `mysql`       | MySQL Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)       |
 | `oracledb`    | Oracle DB Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/oracledbreceiver)    |
 | `postgresql`  | PostgreSQL Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/postgresqlreceiver)  |
@@ -208,5 +214,5 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | Component      | Description             | Document                                                                                                                |
 | -------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `routing`      | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
-| `servicegraph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
-| `spanmetrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
+| `service_graph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
+| `span_metrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
