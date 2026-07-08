@@ -164,3 +164,66 @@ func TestSendLogs(t *testing.T) {
 	require.NoError(t, exporter.ConsumeLogs(t.Context(), logs))
 	assert.Equal(t, int64(1), requestsCounter.Load())
 }
+
+func TestResolveIPv4(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name             string
+		endpoint         string
+		wantOriginalAddr string
+		wantIPv4         bool
+		wantErr          bool
+	}{
+		{
+			name:             "hostname is resolved to IPv4",
+			endpoint:         "localhost:4317",
+			wantOriginalAddr: "localhost:4317",
+			wantIPv4:         true,
+		},
+		{
+			name:             "IP address is returned unchanged",
+			endpoint:         "127.0.0.1:4317",
+			wantOriginalAddr: "",
+			wantIPv4:         false,
+		},
+		{
+			name:             "IPv6 address is returned unchanged",
+			endpoint:         "[::1]:4317",
+			wantOriginalAddr: "",
+			wantIPv4:         false,
+		},
+		{
+			name:     "no port in endpoint",
+			endpoint: "localhost",
+			wantErr:  true,
+		},
+		{
+			name:     "unresolvable hostname",
+			endpoint: "unresolvable.invalid:4317",
+			wantErr:  true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			resolved, originalAddr, err := resolveIPv4(t.Context(), tt.endpoint)
+			if tt.wantErr {
+				require.Error(t, err)
+				return
+			}
+			require.NoError(t, err)
+			assert.Equal(t, tt.wantOriginalAddr, originalAddr)
+			if tt.wantIPv4 {
+				host, _, err := net.SplitHostPort(resolved)
+				require.NoError(t, err)
+				ip := net.ParseIP(host)
+				require.NotNil(t, ip)
+				assert.NotNil(t, ip.To4(), "expected IPv4 address, got %s", host)
+			} else {
+				assert.Equal(t, tt.endpoint, resolved)
+			}
+		})
+	}
+}
