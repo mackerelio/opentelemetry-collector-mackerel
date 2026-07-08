@@ -199,15 +199,20 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 
 | Component     | Description           | Document                                                                                                             |
 | ------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `nop`         | No-op Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                 |
-| `otlp`        | OTLP Receiver         | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                |
-| `awsxray`     | AWS X-Ray Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)     |
-| `host_metrics` | Host Metrics Receiver | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver) |
-| `http_check`   | HTTP Check Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)   |
-| `mysql`       | MySQL Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)       |
-| `oracledb`    | Oracle DB Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/oracledbreceiver)    |
-| `postgresql`  | PostgreSQL Receiver   | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/postgresqlreceiver)  |
-| `redis`       | Redis Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/redisreceiver)       |
+| `nop`             | No-op Receiver           | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver)                    |
+| `otlp`            | OTLP Receiver            | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)                   |
+| `awscloudwatch`   | AWS CloudWatch Receiver  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awscloudwatchreceiver)  |
+| `awsxray`         | AWS X-Ray Receiver       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/awsxrayreceiver)        |
+| `file_log`         | File Log Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/filelogreceiver)        |
+| `fluent_forward`  | Fluent Forward Receiver  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/fluentforwardreceiver)  |
+| `host_metrics`    | Host Metrics Receiver    | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver)    |
+| `http_check`      | HTTP Check Receiver      | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/httpcheckreceiver)      |
+| `journald`        | Journald Receiver        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/journaldreceiver)       |
+| `mysql`           | MySQL Receiver           | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/mysqlreceiver)          |
+| `oracledb`        | Oracle DB Receiver       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/oracledbreceiver)       |
+| `postgresql`      | PostgreSQL Receiver      | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/postgresqlreceiver)     |
+| `redis`           | Redis Receiver           | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/redisreceiver)          |
+| `syslog`          | Syslog Receiver          | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/syslogreceiver)         |
 
 ### Connectors
 
