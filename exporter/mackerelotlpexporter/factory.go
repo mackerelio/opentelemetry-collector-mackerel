@@ -17,6 +17,7 @@ const (
 	defaultBatchMaxSizeBytes = 3_500_000 // 3.5MB
 	defaultMetricsEndpoint   = "otlp.mackerelio.com:4317"
 	defaultTracesEndpoint    = "https://otlp-vaxila.mackerelio.com"
+	defaultLogsEndpoint      = "https://otlp-vaxila.mackerelio.com"
 )
 
 func NewFactory() exporter.Factory {
@@ -26,6 +27,7 @@ func NewFactory() exporter.Factory {
 		xexporter.WithDeprecatedTypeAlias(component.MustNewType("mackerelotlp")),
 		xexporter.WithTraces(createTraces, metadata.TracesStability),
 		xexporter.WithMetrics(createMetrics, metadata.MetricsStability),
+		xexporter.WithLogs(createLogs, metadata.LogsStability),
 	)
 }
 
@@ -52,6 +54,7 @@ func createDefaultConfig() component.Config {
 		RetryConfig:     configretry.NewDefaultBackOffConfig(),
 		MetricsEndpoint: defaultMetricsEndpoint,
 		TracesEndpoint:  defaultTracesEndpoint,
+		LogsEndpoint:    defaultLogsEndpoint,
 		InSecure:        false,
 	}
 }

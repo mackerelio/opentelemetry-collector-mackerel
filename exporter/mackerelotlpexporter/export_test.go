@@ -15,6 +15,7 @@ import (
 	"go.opentelemetry.io/collector/config/configoptional"
 	"go.opentelemetry.io/collector/exporter/exporterhelper"
 	"go.opentelemetry.io/collector/exporter/exportertest"
+	"go.opentelemetry.io/collector/pdata/plog"
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/pmetric/pmetricotlp"
 	"go.opentelemetry.io/collector/pdata/ptrace"
@@ -122,5 +123,44 @@ func TestSendTraces(t *testing.T) {
 
 	traces := ptrace.NewTraces()
 	require.NoError(t, exporter.ConsumeTraces(t.Context(), traces))
+	assert.Equal(t, int64(1), requestsCounter.Load())
+}
+
+func TestSendLogs(t *testing.T) {
+	t.Parallel()
+
+	requestsCounter := new(atomic.Int64)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/v1/logs", func(w http.ResponseWriter, r *http.Request) {
+		requestsCounter.Add(1)
+
+		assert.Equal(t, "*/*", r.Header.Get("Accept"))
+		assert.Equal(t, "dummy", r.Header.Get("Mackerel-Api-Key"))
+
+		w.WriteHeader(http.StatusOK)
+	})
+	srv := httptest.NewServer(mux)
+	t.Cleanup(srv.Close)
+
+	factory := NewFactory()
+	cfg := factory.CreateDefaultConfig().(*Config)
+	// Disable queuing to ensure that we execute the request when calling ConsumeLogs
+	// otherwise we will not see any errors.
+	cfg.QueueConfig = configoptional.None[exporterhelper.QueueBatchConfig]()
+	cfg.LogsEndpoint = srv.URL
+	cfg.MackerelApiKey = "dummy"
+	cfg.InSecure = true
+	set := exportertest.NewNopSettings(factory.Type())
+
+	exporter, err := factory.CreateLogs(t.Context(), set, cfg)
+	require.NoError(t, err)
+	require.NotNil(t, exporter)
+	t.Cleanup(func() { assert.NoError(t, exporter.Shutdown(t.Context())) })
+
+	host := componenttest.NewNopHost()
+	require.NoError(t, exporter.Start(t.Context(), host))
+
+	logs := plog.NewLogs()
+	require.NoError(t, exporter.ConsumeLogs(t.Context(), logs))
 	assert.Equal(t, int64(1), requestsCounter.Load())
 }

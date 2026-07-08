@@ -2,13 +2,13 @@
 
 🌎 [日本語](./README.ja.md) | English
 
-Export OpenTelemetry Metrics/Traces from OpenTelemetry Collector to [Mackerel](https://mackerel.io/) using OTLP (OpenTelemetry Protocol).
+Export OpenTelemetry Metrics/Traces/Logs from OpenTelemetry Collector to [Mackerel](https://mackerel.io/) using OTLP (OpenTelemetry Protocol).
 
 Mackerel natively supports OTLP, so we can send telemetry using the [OTLP gRPC Exporter](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter) or [OTLP HTTP Exporter](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlphttpexporter) provided by the OpenTelemetry community.
 
 However, Mackerel requires different endpoints and OTLP transport types for each telemetry type. This necessitates setting up multiple exporters, which is inconvenient.
 
-Using the Mackerel OTLP Exporter, you can send both traces and metrics with the same exporter.
+Using the Mackerel OTLP Exporter, you can send traces, metrics, and logs with the same exporter.
 
 In addition, appropriate timeout and batch configurations are applied by default to match Mackerel's specifications. You do not need to add the [Batch Processor](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor) to your pipeline.
 
@@ -42,6 +42,9 @@ service:
       receivers: [otlp]
       exporters: [mackerel_otlp]
     traces:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    logs:
       receivers: [otlp]
       exporters: [mackerel_otlp]
 ```
