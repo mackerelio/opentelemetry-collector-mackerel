@@ -94,6 +94,7 @@ $ sudo systemctl status otelcol-mackerel.service  --no-pager --lines=0
 | -------------------------------------- | ------------------------------------------------------------------------- |
 | `OTELCOL_MACKEREL_HOST`                | OTLP レシーバーが受信する IP アドレスやホスト名 (デフォルト値: localhost) |
 | `OTELCOL_MACKEREL_SAMPLING_PERCENTAGE` | 指定したパーセンテージでトレースに確率的サンプリングを適用します          |
+| `OTELCOL_MACKEREL_PREFER_IPV4`         | メトリック用gRPCエンドポイントをIPv4アドレスに名前解決します             |
 
 ## 高度な使い方
 

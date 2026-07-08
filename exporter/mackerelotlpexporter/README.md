@@ -59,3 +59,7 @@ You can additionally set the following configurations:
 - `timeout`: [Timeout configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#timeout)
 - `sending_queue`: [Sending queue configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#sending-queue)
 - `retry_on_failure`: [Retry-on-failure configuration](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#retry-on-failure)
+
+### Environment Variables
+
+- `OTELCOL_MACKEREL_PREFER_IPV4`: When set to any non-empty value, the metrics gRPC endpoint hostname is resolved to an IPv4 address before connecting. This is useful when gRPC connections fail because DNS returns AAAA records but the environment does not actually have IPv6 connectivity. Only the metrics endpoint is affected because it is the only gRPC endpoint.
