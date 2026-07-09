@@ -59,3 +59,7 @@ service:
 - `timeout`: [タイムアウト設定](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#timeout)
 - `sending_queue`: [送信キューの設定](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#sending-queue)
 - `retry_on_failure`: [送信失敗時の再実行設定](https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/exporterhelper/README.md#retry-on-failure)
+
+### 環境変数
+
+- `OTELCOL_MACKEREL_PREFER_IPV4`: `1`などの値を設定すると、メトリクス用gRPCエンドポイントのホスト名をIPv4アドレスに名前解決してから接続します。DNSがAAAAレコードを返すもののIPv6の疎通がない環境でgRPC接続に失敗する場合に有用です。gRPCエンドポイントであるメトリックのエンドポイントにのみ影響します。

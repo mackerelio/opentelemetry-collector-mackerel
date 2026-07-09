@@ -94,6 +94,7 @@ You can modify the config from the default by setting additional environment var
 | -------------------------------------- | --------------------------------------------------------------- |
 | `OTELCOL_MACKEREL_HOST`                | bind address or hostname for OTLP receiver (default: localhost) |
 | `OTELCOL_MACKEREL_SAMPLING_PERCENTAGE` | apply probabilistic sampling to the traces at this rate         |
+| `OTELCOL_MACKEREL_PREFER_IPV4`         | resolve the metrics gRPC endpoint to an IPv4 address            |
 
 ## Advanced Usage
 
