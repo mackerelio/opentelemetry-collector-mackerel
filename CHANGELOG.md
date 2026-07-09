@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.15.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.14.1...v0.15.0) - 2026-07-09
+
+### Other changes
+- Add log exporter support to mackerelotlpexporter by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/155
+- fix ci by @tjmtmmnk in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/167
+- Add log receiver components and update documentation by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/166
+- introduce forcing IPv4 option for gRPC endpoint by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/156
+- Document OTELCOL_MACKEREL_PREFER_IPV4 environment variable in README by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/168
+
 ## [v0.14.1](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.14.0...v0.14.1) - 2026-07-08
 
 ### Base opentelemetry-collector libraries updates
