@@ -62,4 +62,4 @@ You can additionally set the following configurations:
 
 ### Environment Variables
 
-- `OTELCOL_MACKEREL_PREFER_IPV4`: When set to any non-empty value, the metrics gRPC endpoint hostname is resolved to an IPv4 address before connecting. This is useful when gRPC connections fail because DNS returns AAAA records but the environment does not actually have IPv6 connectivity. Only the metrics endpoint is affected because it is the only gRPC endpoint.
+- `OTELCOL_MACKEREL_PREFER_IPV4`: When set to any value (e.g., `1`), the metrics gRPC endpoint hostname is resolved to an IPv4 address before connecting. This is useful when gRPC connections fail because DNS returns AAAA records but the environment does not actually have IPv6 connectivity. Only the metrics endpoint is affected because it is the only gRPC endpoint.
