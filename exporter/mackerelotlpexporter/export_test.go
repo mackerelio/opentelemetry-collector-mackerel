@@ -22,6 +22,8 @@ import (
 	"go.opentelemetry.io/collector/pdata/ptrace/ptraceotlp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 )
 
 type mockMetricsReceiver struct {
@@ -165,65 +167,99 @@ func TestSendLogs(t *testing.T) {
 	assert.Equal(t, int64(1), requestsCounter.Load())
 }
 
-func TestResolveIPv4(t *testing.T) {
+func TestIPv4Resolver(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name             string
-		endpoint         string
-		wantOriginalAddr string
-		wantIPv4         bool
-		wantErr          bool
+		name          string
+		endpoint      string
+		wantIPv4      bool
+		wantBuildErr  bool
+		wantLookupErr bool
 	}{
 		{
-			name:             "hostname is resolved to IPv4",
-			endpoint:         "localhost:4317",
-			wantOriginalAddr: "localhost:4317",
-			wantIPv4:         true,
+			name:     "hostname is resolved to IPv4",
+			endpoint: "localhost:4317",
+			wantIPv4: true,
 		},
 		{
-			name:             "IP address is returned unchanged",
-			endpoint:         "127.0.0.1:4317",
-			wantOriginalAddr: "",
-			wantIPv4:         false,
+			name:     "IP address is returned unchanged",
+			endpoint: "127.0.0.1:4317",
 		},
 		{
-			name:             "IPv6 address is returned unchanged",
-			endpoint:         "[::1]:4317",
-			wantOriginalAddr: "",
-			wantIPv4:         false,
+			name:     "IPv6 address is returned unchanged",
+			endpoint: "[::1]:4317",
 		},
 		{
-			name:     "no port in endpoint",
-			endpoint: "localhost",
-			wantErr:  true,
+			name:         "no port in endpoint",
+			endpoint:     "localhost",
+			wantBuildErr: true,
 		},
 		{
-			name:     "unresolvable hostname",
-			endpoint: "unresolvable.invalid:4317",
-			wantErr:  true,
+			name:          "unresolvable hostname",
+			endpoint:      "unresolvable.invalid:4317",
+			wantLookupErr: true,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			resolved, originalAddr, err := resolveIPv4(t.Context(), tt.endpoint)
-			if tt.wantErr {
+
+			cc := &testResolverClientConn{}
+			target := resolver.Target{}
+			target.URL.Scheme = ipv4ResolverScheme
+			target.URL.Path = "/" + tt.endpoint
+
+			builder := &ipv4ResolverBuilder{}
+			r, err := builder.Build(target, cc, resolver.BuildOptions{})
+			if tt.wantBuildErr {
 				require.Error(t, err)
 				return
 			}
 			require.NoError(t, err)
-			assert.Equal(t, tt.wantOriginalAddr, originalAddr)
+			defer r.Close()
+
+			if tt.wantLookupErr {
+				require.Error(t, cc.err)
+				return
+			}
+
+			require.NoError(t, cc.err)
+			require.NotEmpty(t, cc.state.Addresses)
+
 			if tt.wantIPv4 {
-				host, _, err := net.SplitHostPort(resolved)
-				require.NoError(t, err)
-				ip := net.ParseIP(host)
-				require.NotNil(t, ip)
-				assert.NotNil(t, ip.To4(), "expected IPv4 address, got %s", host)
+				for _, addr := range cc.state.Addresses {
+					host, _, err := net.SplitHostPort(addr.Addr)
+					require.NoError(t, err)
+					ip := net.ParseIP(host)
+					require.NotNil(t, ip)
+					assert.NotNil(t, ip.To4(), "expected IPv4 address, got %s", host)
+				}
 			} else {
-				assert.Equal(t, tt.endpoint, resolved)
+				assert.Equal(t, tt.endpoint, cc.state.Addresses[0].Addr)
 			}
 		})
 	}
+}
+
+type testResolverClientConn struct {
+	state resolver.State
+	err   error
+}
+
+func (cc *testResolverClientConn) UpdateState(state resolver.State) error {
+	cc.state = state
+	cc.err = nil
+	return nil
+}
+
+func (cc *testResolverClientConn) ReportError(err error) {
+	cc.err = err
+}
+
+func (cc *testResolverClientConn) NewAddress([]resolver.Address) {}
+
+func (cc *testResolverClientConn) ParseServiceConfig(string) *serviceconfig.ParseResult {
+	return nil
 }
