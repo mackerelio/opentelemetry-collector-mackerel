@@ -217,8 +217,9 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 
 ### Connectors
 
-| Component      | Description             | Document                                                                                                                |
-| -------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `routing`      | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
+| Component       | Description             | Document                                                                                                                |
+| --------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `forward`       | Forward Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/connector/forwardconnector)              |
+| `routing`       | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
 | `service_graph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
 | `span_metrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
