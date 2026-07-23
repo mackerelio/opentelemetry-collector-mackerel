@@ -2,12 +2,14 @@ package mackerelotlpexporter
 
 import (
 	"context"
+	"errors"
 	"net"
 	"net/http"
 	"net/http/httptest"
 	"sync"
 	"sync/atomic"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -171,16 +173,20 @@ func TestIPv4Resolver(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name          string
-		endpoint      string
-		wantIPv4      bool
-		wantBuildErr  bool
-		wantLookupErr bool
+		name           string
+		endpoint       string
+		wantIPv4       bool
+		wantBuildErr   bool
+		wantLookupErr  bool
+		lookupErr      error
+		lookupIPs      []net.IP
+		updateStateErr error
 	}{
 		{
-			name:     "hostname is resolved to IPv4",
-			endpoint: "localhost:4317",
-			wantIPv4: true,
+			name:      "hostname is resolved to IPv4",
+			endpoint:  "localhost:4317",
+			wantIPv4:  true,
+			lookupIPs: []net.IP{net.ParseIP("127.0.0.1")},
 		},
 		{
 			name:     "IP address is returned unchanged",
@@ -199,6 +205,14 @@ func TestIPv4Resolver(t *testing.T) {
 			name:          "unresolvable hostname",
 			endpoint:      "unresolvable.invalid:4317",
 			wantLookupErr: true,
+			lookupErr:     errors.New("lookup failed"),
+		},
+		{
+			name:           "update state error",
+			endpoint:       "stateerr.invalid:4317",
+			wantLookupErr:  true,
+			lookupIPs:      []net.IP{net.ParseIP("127.0.0.2")},
+			updateStateErr: errors.New("update state failed"),
 		},
 	}
 
@@ -206,12 +220,22 @@ func TestIPv4Resolver(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			cc := &testResolverClientConn{}
+			cc := &testResolverClientConn{updateStateErr: tt.updateStateErr}
 			target := resolver.Target{}
 			target.URL.Scheme = ipv4ResolverScheme
 			target.URL.Path = "/" + tt.endpoint
 
-			builder := &ipv4ResolverBuilder{}
+			builder := &ipv4ResolverBuilder{
+				lookupIP: func(context.Context, string, string) ([]net.IP, error) {
+					if tt.lookupErr != nil {
+						return nil, tt.lookupErr
+					}
+					if tt.lookupIPs != nil {
+						return tt.lookupIPs, nil
+					}
+					return []net.IP{net.ParseIP("127.0.0.1")}, nil
+				},
+			}
 			r, err := builder.Build(target, cc, resolver.BuildOptions{})
 			if tt.wantBuildErr {
 				require.Error(t, err)
@@ -243,12 +267,45 @@ func TestIPv4Resolver(t *testing.T) {
 	}
 }
 
+func TestIPv4ResolverResolveNowReResolve(t *testing.T) {
+	t.Parallel()
+
+	cc := &testResolverClientConn{}
+	target := resolver.Target{}
+	target.URL.Scheme = ipv4ResolverScheme
+	target.URL.Path = "/example.invalid:4317"
+
+	var lookupCount atomic.Int64
+	builder := &ipv4ResolverBuilder{
+		resolveInterval: 10 * time.Millisecond,
+		lookupIP: func(context.Context, string, string) ([]net.IP, error) {
+			lookupCount.Add(1)
+			return []net.IP{net.ParseIP("127.0.0.1")}, nil
+		},
+	}
+
+	r, err := builder.Build(target, cc, resolver.BuildOptions{})
+	require.NoError(t, err)
+	defer r.Close()
+
+	before := lookupCount.Load()
+	r.ResolveNow(resolver.ResolveNowOptions{})
+	require.Eventually(t, func() bool {
+		return lookupCount.Load() > before
+	}, time.Second, 5*time.Millisecond)
+}
+
 type testResolverClientConn struct {
-	state resolver.State
-	err   error
+	state          resolver.State
+	err            error
+	updateStateErr error
 }
 
 func (cc *testResolverClientConn) UpdateState(state resolver.State) error {
+	if cc.updateStateErr != nil {
+		cc.err = cc.updateStateErr
+		return cc.updateStateErr
+	}
 	cc.state = state
 	cc.err = nil
 	return nil
