@@ -2,12 +2,14 @@ package mackerelotlpexporter
 
 import (
 	"context"
+	"errors"
 	"net"
 	"net/http"
 	"net/http/httptest"
 	"sync"
 	"sync/atomic"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -22,6 +24,8 @@ import (
 	"go.opentelemetry.io/collector/pdata/ptrace/ptraceotlp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/serviceconfig"
 )
 
 type mockMetricsReceiver struct {
@@ -165,65 +169,154 @@ func TestSendLogs(t *testing.T) {
 	assert.Equal(t, int64(1), requestsCounter.Load())
 }
 
-func TestResolveIPv4(t *testing.T) {
+func TestIPv4Resolver(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name             string
-		endpoint         string
-		wantOriginalAddr string
-		wantIPv4         bool
-		wantErr          bool
+		name           string
+		endpoint       string
+		wantIPv4       bool
+		wantBuildErr   bool
+		wantLookupErr  bool
+		lookupErr      error
+		lookupIPs      []net.IP
+		updateStateErr error
 	}{
 		{
-			name:             "hostname is resolved to IPv4",
-			endpoint:         "localhost:4317",
-			wantOriginalAddr: "localhost:4317",
-			wantIPv4:         true,
+			name:      "hostname is resolved to IPv4",
+			endpoint:  "localhost:4317",
+			wantIPv4:  true,
+			lookupIPs: []net.IP{net.ParseIP("127.0.0.1")},
 		},
 		{
-			name:             "IP address is returned unchanged",
-			endpoint:         "127.0.0.1:4317",
-			wantOriginalAddr: "",
-			wantIPv4:         false,
+			name:     "IP address is returned unchanged",
+			endpoint: "127.0.0.1:4317",
 		},
 		{
-			name:             "IPv6 address is returned unchanged",
-			endpoint:         "[::1]:4317",
-			wantOriginalAddr: "",
-			wantIPv4:         false,
+			name:     "IPv6 address is returned unchanged",
+			endpoint: "[::1]:4317",
 		},
 		{
-			name:     "no port in endpoint",
-			endpoint: "localhost",
-			wantErr:  true,
+			name:         "no port in endpoint",
+			endpoint:     "localhost",
+			wantBuildErr: true,
 		},
 		{
-			name:     "unresolvable hostname",
-			endpoint: "unresolvable.invalid:4317",
-			wantErr:  true,
+			name:          "unresolvable hostname",
+			endpoint:      "unresolvable.invalid:4317",
+			wantLookupErr: true,
+			lookupErr:     errors.New("lookup failed"),
+		},
+		{
+			name:           "update state error",
+			endpoint:       "stateerr.invalid:4317",
+			wantLookupErr:  true,
+			lookupIPs:      []net.IP{net.ParseIP("127.0.0.2")},
+			updateStateErr: errors.New("update state failed"),
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			resolved, originalAddr, err := resolveIPv4(t.Context(), tt.endpoint)
-			if tt.wantErr {
+
+			cc := &testResolverClientConn{updateStateErr: tt.updateStateErr}
+			target := resolver.Target{}
+			target.URL.Scheme = ipv4ResolverScheme
+			target.URL.Path = "/" + tt.endpoint
+
+			builder := &ipv4ResolverBuilder{
+				lookupIP: func(context.Context, string, string) ([]net.IP, error) {
+					if tt.lookupErr != nil {
+						return nil, tt.lookupErr
+					}
+					if tt.lookupIPs != nil {
+						return tt.lookupIPs, nil
+					}
+					return []net.IP{net.ParseIP("127.0.0.1")}, nil
+				},
+			}
+			r, err := builder.Build(target, cc, resolver.BuildOptions{})
+			if tt.wantBuildErr {
 				require.Error(t, err)
 				return
 			}
 			require.NoError(t, err)
-			assert.Equal(t, tt.wantOriginalAddr, originalAddr)
+			defer r.Close()
+
+			if tt.wantLookupErr {
+				require.Error(t, cc.err)
+				return
+			}
+
+			require.NoError(t, cc.err)
+			require.NotEmpty(t, cc.state.Addresses)
+
 			if tt.wantIPv4 {
-				host, _, err := net.SplitHostPort(resolved)
-				require.NoError(t, err)
-				ip := net.ParseIP(host)
-				require.NotNil(t, ip)
-				assert.NotNil(t, ip.To4(), "expected IPv4 address, got %s", host)
+				for _, addr := range cc.state.Addresses {
+					host, _, err := net.SplitHostPort(addr.Addr)
+					require.NoError(t, err)
+					ip := net.ParseIP(host)
+					require.NotNil(t, ip)
+					assert.NotNil(t, ip.To4(), "expected IPv4 address, got %s", host)
+				}
 			} else {
-				assert.Equal(t, tt.endpoint, resolved)
+				assert.Equal(t, tt.endpoint, cc.state.Addresses[0].Addr)
 			}
 		})
 	}
+}
+
+func TestIPv4ResolverResolveNowReResolve(t *testing.T) {
+	t.Parallel()
+
+	cc := &testResolverClientConn{}
+	target := resolver.Target{}
+	target.URL.Scheme = ipv4ResolverScheme
+	target.URL.Path = "/example.invalid:4317"
+
+	var lookupCount atomic.Int64
+	builder := &ipv4ResolverBuilder{
+		resolveInterval: 10 * time.Millisecond,
+		lookupIP: func(context.Context, string, string) ([]net.IP, error) {
+			lookupCount.Add(1)
+			return []net.IP{net.ParseIP("127.0.0.1")}, nil
+		},
+	}
+
+	r, err := builder.Build(target, cc, resolver.BuildOptions{})
+	require.NoError(t, err)
+	defer r.Close()
+
+	before := lookupCount.Load()
+	r.ResolveNow(resolver.ResolveNowOptions{})
+	require.Eventually(t, func() bool {
+		return lookupCount.Load() > before
+	}, time.Second, 5*time.Millisecond)
+}
+
+type testResolverClientConn struct {
+	state          resolver.State
+	err            error
+	updateStateErr error
+}
+
+func (cc *testResolverClientConn) UpdateState(state resolver.State) error {
+	if cc.updateStateErr != nil {
+		cc.err = cc.updateStateErr
+		return cc.updateStateErr
+	}
+	cc.state = state
+	cc.err = nil
+	return nil
+}
+
+func (cc *testResolverClientConn) ReportError(err error) {
+	cc.err = err
+}
+
+func (cc *testResolverClientConn) NewAddress([]resolver.Address) {}
+
+func (cc *testResolverClientConn) ParseServiceConfig(string) *serviceconfig.ParseResult {
+	return nil
 }

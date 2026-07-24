@@ -3,8 +3,6 @@ package mackerelotlpexporter
 import (
 	"context"
 	"errors"
-	"fmt"
-	"net"
 	"os"
 
 	"go.opentelemetry.io/collector/component"
@@ -43,17 +41,12 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	otlpCfg.ClientConfig.Headers = configopaque.MapList{
 		{Name: "Mackerel-Api-Key", Value: mackerelApiKey},
 	}
-	// IPv4 resolution targets only metricsEndpoint because it is the only gRPC endpoint.
 	metricsEndpoint := mackerelOTLPCfg.MetricsEndpoint
 	if os.Getenv("OTELCOL_MACKEREL_PREFER_IPV4") != "" {
-		resolved, originalHostPort, err := resolveIPv4(ctx, metricsEndpoint)
-		if err != nil {
-			return nil, err
-		}
-		metricsEndpoint = resolved
-		if originalHostPort != "" {
-			otlpCfg.ClientConfig.Authority = originalHostPort
-		}
+		// Use the custom mdotipv4:/// resolver scheme so gRPC re-resolves on connection failure.
+		// gRPC derives :authority and TLS SNI from the endpoint portion of the URI,
+		// so the original hostname is preserved without setting Authority explicitly.
+		metricsEndpoint = ipv4ResolverScheme + ":///" + metricsEndpoint
 	}
 	otlpCfg.ClientConfig.Endpoint = metricsEndpoint
 	otlpCfg.ClientConfig.Compression = "gzip"
@@ -148,24 +141,3 @@ func createLogs(ctx context.Context, set exporter.Settings, cfg component.Config
 	return exp, nil
 }
 
-// resolveIPv4 resolves the host in endpoint to an IPv4 address.
-// Returns the resolved endpoint and the original host:port.
-// If the host is already an IP address, it returns the endpoint unchanged.
-// Returns an error if the endpoint cannot be parsed as host:port.
-func resolveIPv4(ctx context.Context, endpoint string) (string, string, error) {
-	host, port, err := net.SplitHostPort(endpoint)
-	if err != nil {
-		return "", "", fmt.Errorf("parse endpoint %q: %w", endpoint, err)
-	}
-	if net.ParseIP(host) != nil {
-		return endpoint, "", nil
-	}
-	ips, err := net.DefaultResolver.LookupIP(ctx, "ip4", host)
-	if err != nil {
-		return "", "", fmt.Errorf("resolve %s to IPv4: %w", host, err)
-	}
-	if len(ips) == 0 {
-		return "", "", fmt.Errorf("no IPv4 address found for %s", host)
-	}
-	return net.JoinHostPort(ips[0].String(), port), endpoint, nil
-}
