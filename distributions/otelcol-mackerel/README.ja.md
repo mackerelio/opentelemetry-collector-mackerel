@@ -217,8 +217,9 @@ OpenTelemetry コミュニティが提供する OpenTelemetry コレクターコ
 
 ### コネクター
 
-| コンポーネント | 説明                    | ドキュメント                                                                                                            |
-| -------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `routing`      | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
+| コンポーネント  | 説明                    | ドキュメント                                                                                                            |
+| --------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `forward`       | Forward Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector/tree/main/connector/forwardconnector)              |
+| `routing`       | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
 | `service_graph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
 | `span_metrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
