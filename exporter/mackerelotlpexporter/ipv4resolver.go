@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/resolver"
 )
 
-const ipv4ResolverScheme = "ipv4"
+const ipv4ResolverScheme = "mdotipv4"
 
 var minResolveInterval = 30 * time.Second
 

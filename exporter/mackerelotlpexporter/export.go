@@ -43,7 +43,7 @@ func createMetrics(ctx context.Context, set exporter.Settings, cfg component.Con
 	}
 	metricsEndpoint := mackerelOTLPCfg.MetricsEndpoint
 	if os.Getenv("OTELCOL_MACKEREL_PREFER_IPV4") != "" {
-		// Use the custom ipv4:/// resolver scheme so gRPC re-resolves on connection failure.
+		// Use the custom mdotipv4:/// resolver scheme so gRPC re-resolves on connection failure.
 		// gRPC derives :authority and TLS SNI from the endpoint portion of the URI,
 		// so the original hostname is preserved without setting Authority explicitly.
 		metricsEndpoint = ipv4ResolverScheme + ":///" + metricsEndpoint
