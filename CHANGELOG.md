@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.15.1](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.0...v0.15.1) - 2026-07-27
+
+### Other changes
+- add Forward Connector by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/175
+- replace gRPC IPv4 resolver with custom resolver method by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/174
+- Update module google.golang.org/grpc to v1.82.1 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/178
+
 ## [v0.15.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.14.1...v0.15.0) - 2026-07-09
 
 ### Other changes
