@@ -1,6 +1,6 @@
 module-sets:
   beta:
-    version: v0.15.0
+    version: v0.15.1
     modules:
       - github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter
       - github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider
