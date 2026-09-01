@@ -16,7 +16,7 @@ jobs:
         with:
           go-version-file: go.mod
           cache: ${{ inputs.go-cache }}
-      - uses: docker/setup-qemu-action@ce360397dd3f832beb865e1373c09c0e9f86d70a # v4.0.0
+      - uses: docker/setup-qemu-action@1f40c72289eff860ee54a304f1438e3cff362e0a # v4.3.0
       - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
       - name: Run OpenTelemetry Collector Builder
         run: |
