@@ -2,13 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "ocb": { "managerFilePatterns": ["/^distributions/.*/manifest\\.yaml$/"] },
+  "labels": ["dependencies"],
   "packageRules": [
     {
       "matchManagers": ["gomod"],
       "matchDatasources": ["go"],
       "groupName": "opentelemetry-collector upstream dependencies",
       "matchPackageNames": ["/^go.opentelemetry.io/collector/"],
-      "labels": ["upgrade-otelcol-libs"]
+      "addLabels": ["upgrade-otelcol-libs"]
     },
     {
       "matchManagers": ["ocb"],
@@ -17,7 +18,7 @@
         "https://github.com/open-telemetry/opentelemetry-collector-contrib"
       ],
       "groupName": "opentelemetry-collector upstream dependencies",
-      "labels": ["upgrade-otelcol-libs"]
+      "addLabels": ["upgrade-otelcol-libs"]
     },
     {
       "matchDatasources": ["golang-version"],
