@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["github>hatena/renovate-config"],
+  "minimumReleaseAge": "5 days",
   "ocb": { "managerFilePatterns": ["/^distributions/.*/manifest\\.yaml$/"] },
   "labels": ["dependencies"],
   "packageRules": [
@@ -25,6 +26,5 @@
       "matchFileNames": ["go.mod"],
       "rangeStrategy": "bump"
     }
-  ],
-  "postUpdateOptions": ["gomodTidy"]
+  ]
 }
