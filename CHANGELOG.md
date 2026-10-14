@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.15.3](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.2...v0.15.3) - 2026-10-14
+
+### Other changes
+- Update actions/checkout action to v6.1.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/172
+- Update go module directive to v1.27.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/183
+- Update module github.com/go-git/go-git/v5 to v5.19.2 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/190
+- Update module go.yaml.in/yaml/v3 to v3.0.5 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/188
+- Use hatena/renovate-config with 5-day release age by @benevolent0505 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/194
+- Update actions/checkout action to v7 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/162
+- Update module google.golang.org/grpc to v1.83.1 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/184
+- Update docker/login-action action to v4.6.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/176
+
 ## [v0.15.2](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.1...v0.15.2) - 2026-09-08
 
 ### Other changes
