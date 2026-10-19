@@ -5,6 +5,11 @@ dist:
   version: 0.15.2
   output_path: ./_build
 
+extensions:
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/storage/filestorage v0.155.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/healthcheckextension v0.155.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/extension/pprofextension v0.155.0
+
 exporters:
   - gomod: go.opentelemetry.io/collector/exporter/debugexporter v0.155.0
   - gomod: go.opentelemetry.io/collector/exporter/nopexporter v0.155.0
