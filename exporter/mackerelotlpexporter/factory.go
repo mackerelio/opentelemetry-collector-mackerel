@@ -17,7 +17,7 @@ const (
 	defaultBatchMaxSizeBytes = 3_500_000 // 3.5MB
 	defaultMetricsEndpoint   = "otlp.mackerelio.com:4317"
 	defaultTracesEndpoint    = "https://otlp-vaxila.mackerelio.com"
-	defaultLogsEndpoint      = "https://otlp-vaxila.mackerelio.com"
+	defaultLogsEndpoint      = "https://otlp.mackerelio.com:4318"
 )
 
 func NewFactory() exporter.Factory {

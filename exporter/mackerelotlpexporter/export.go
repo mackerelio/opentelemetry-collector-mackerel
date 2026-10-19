@@ -127,7 +127,6 @@ func createLogs(ctx context.Context, set exporter.Settings, cfg component.Config
 	otlpHTTPCfg.RetryConfig = mackerelOTLPCfg.RetryConfig
 	otlpHTTPCfg.ClientConfig.Timeout = mackerelOTLPCfg.TimeoutConfig.Timeout
 	otlpHTTPCfg.ClientConfig.Headers = configopaque.MapList{
-		{Name: "Accept", Value: "*/*"},
 		{Name: "Mackerel-Api-Key", Value: mackerelApiKey},
 	}
 	otlpHTTPCfg.ClientConfig.Endpoint = mackerelOTLPCfg.LogsEndpoint
@@ -140,4 +139,3 @@ func createLogs(ctx context.Context, set exporter.Settings, cfg component.Config
 	}
 	return exp, nil
 }
-

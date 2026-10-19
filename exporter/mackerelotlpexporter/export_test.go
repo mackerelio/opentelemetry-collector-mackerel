@@ -138,7 +138,6 @@ func TestSendLogs(t *testing.T) {
 	mux.HandleFunc("/v1/logs", func(w http.ResponseWriter, r *http.Request) {
 		requestsCounter.Add(1)
 
-		assert.Equal(t, "*/*", r.Header.Get("Accept"))
 		assert.Equal(t, "dummy", r.Header.Get("Mackerel-Api-Key"))
 
 		w.WriteHeader(http.StatusOK)
