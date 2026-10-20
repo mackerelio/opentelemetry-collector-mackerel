@@ -187,12 +187,14 @@ exporters:
   mackerel_otlp:
     sending_queue:
       enabled: true
-      storage: file_storage/queue # ← キューの実体をディスクへ
+      storage: file_storage/queue # キューの実体をディスクへ
+      queue_size: 30000000 # 3時間分のデータポイント数を余裕で上回る値を設定
+      num_consumers: 3 # 復旧時に一気に送りつけないよう、同時送信ワーカー数を絞る
     retry_on_failure:
       enabled: true
-      # デフォルト (300s) ではメンテナンス中にリトライを諦めてデータを破棄します。
-      # 0 を指定すると、再送可能なエラーに対して無期限にリトライします。
-      max_elapsed_time: 0
+      max_elapsed_time: 0s # ここを0s（無期限）にしないと5分でデータが消滅する
+      initial_interval: 5s
+      max_interval: 1m
 
 service:
   extensions: [file_storage/queue]

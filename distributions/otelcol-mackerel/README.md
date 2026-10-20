@@ -188,11 +188,13 @@ exporters:
     sending_queue:
       enabled: true
       storage: file_storage/queue # spool the queue to disk
+      queue_size: 30000000 # comfortably exceeds the number of data points for 3 hours
+      num_consumers: 3 # limit concurrent send workers so recovery does not flood the backend
     retry_on_failure:
       enabled: true
-      # The default (300s) makes the exporter give up and drop data during
-      # maintenance. Set 0 to retry retryable errors indefinitely.
-      max_elapsed_time: 0
+      max_elapsed_time: 0s # must be 0s (indefinite); otherwise data is dropped after 5 minutes
+      initial_interval: 5s
+      max_interval: 1m
 
 service:
   extensions: [file_storage/queue]
