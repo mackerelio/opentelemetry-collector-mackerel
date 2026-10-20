@@ -165,6 +165,55 @@ $ sudo vim /etc/otelcol-mackerel/otelcol-mackerel.conf
 $ sudo systemctl restart otelcol-mackerel.service
 ```
 
+### 送信先メンテナンス時のバッファリング（ディスク退避）
+
+Mackerel 側のメンテナンスなどで送信先エンドポイントが一時的に停止しても、`file_storage` エクステンションと `sending_queue` を組み合わせることで、未送信データをメモリではなくディスク上のキューに退避できます。メモリ常駐分は処理中のバッチ程度に抑えられ、プロセス再起動を跨いでもキューは保持されます。
+
+```yaml
+extensions:
+  # キューをディスクに退避するストレージ。directory は書き込み可能である必要があります。
+  # deb/rpm パッケージの systemd ユニットは StateDirectory により
+  # /var/lib/otelcol-mackerel をサービスユーザー所有で自動作成します。
+  file_storage/queue:
+    directory: /var/lib/otelcol-mackerel
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  mackerel_otlp:
+    sending_queue:
+      enabled: true
+      storage: file_storage/queue # ← キューの実体をディスクへ
+    retry_on_failure:
+      enabled: true
+      # デフォルト (300s) ではメンテナンス中にリトライを諦めてデータを破棄します。
+      # 0 を指定すると、再送可能なエラーに対して無期限にリトライします。
+      max_elapsed_time: 0
+
+service:
+  extensions: [file_storage/queue]
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    traces:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+```
+
+> [!NOTE]
+>
+> - キューの溢れた分は破棄されるため、`directory` を置くディスクには想定停止時間 × 平常時の送信量に見合う空き容量を確保してください。
+> - `max_elapsed_time: 0` でも、OTLP が恒久エラー (429 を除く 4xx など) とみなしたデータは再送されず破棄されます。無期限リトライの対象は 5xx や接続不可といった再送可能なエラーに限られます。
+> - Docker で永続化する場合は、`directory` にボリュームをマウントしてください (例: `--mount type=volume,src=otelcol-mackerel-queue,dst=/var/lib/otelcol-mackerel`)。マウントしない場合、コンテナの再作成時にキューは失われます。
+
 ## コンポーネント
 
 OpenTelemetry コミュニティが提供する OpenTelemetry コレクターコンポーネントの中から、特に有用なものをいくつか選択してバンドルしています。
@@ -223,3 +272,11 @@ OpenTelemetry コミュニティが提供する OpenTelemetry コレクターコ
 | `routing`       | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
 | `service_graph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
 | `span_metrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
+
+### エクステンション
+
+| コンポーネント | 説明                   | ドキュメント                                                                                                           |
+| -------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `file_storage` | File Storage Extension | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/storage/filestorage)  |
+| `health_check` | Health Check Extension | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension) |
+| `pprof`        | pprof Extension        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension)       |
