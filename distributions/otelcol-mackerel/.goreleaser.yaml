@@ -24,6 +24,12 @@ builds:
       - -s -w
     dir: _build
     binary: otelcol-mackerel
+snapshot:
+  # In snapshot mode, GORELEASER_CURRENT_TAG is ignored and the latest git tag
+  # is used as-is. Because this is a monorepo, submodule tags such as
+  # confmap/provider/zerocfgprovider/v0.15.2 leak into .Version and produce
+  # broken filenames. Override the version explicitly here.
+  version_template: "{{ .ShortCommit }}-SNAPSHOT"
 archives:
   - id: otelcol-mackerel
     ids:
