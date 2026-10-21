@@ -165,6 +165,57 @@ $ sudo vim /etc/otelcol-mackerel/otelcol-mackerel.conf
 $ sudo systemctl restart otelcol-mackerel.service
 ```
 
+### Buffering during destination maintenance (on-disk queue)
+
+Even if the destination endpoint is temporarily unavailable (for example during Mackerel-side maintenance), combining the `file_storage` extension with `sending_queue` lets you spool unsent data to an on-disk queue instead of memory. The resident memory stays roughly at the size of the in-flight batch, and the queue survives process restarts.
+
+```yaml
+extensions:
+  # Storage backend that spools the queue to disk. The directory must be writable.
+  # The systemd unit shipped in the deb/rpm packages creates
+  # /var/lib/otelcol-mackerel (owned by the service user) via StateDirectory.
+  file_storage/queue:
+    directory: /var/lib/otelcol-mackerel
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+exporters:
+  mackerel_otlp:
+    sending_queue:
+      enabled: true
+      storage: file_storage/queue # spool the queue to disk
+      queue_size: 30000000 # comfortably exceeds the number of data points for 3 hours
+      num_consumers: 3 # limit concurrent send workers so recovery does not flood the backend
+    retry_on_failure:
+      enabled: true
+      max_elapsed_time: 0s # must be 0s (indefinite); otherwise data is dropped after 5 minutes
+      initial_interval: 5s
+      max_interval: 1m
+
+service:
+  extensions: [file_storage/queue]
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    traces:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+    logs:
+      receivers: [otlp]
+      exporters: [mackerel_otlp]
+```
+
+> [!NOTE]
+>
+> - Data that overflows the queue is dropped, so make sure the disk backing `directory` has enough free space for the expected downtime multiplied by your normal send volume.
+> - Even with `max_elapsed_time: 0`, data that OTLP treats as a permanent error (e.g. 4xx other than 429) is dropped without retry. Indefinite retries only apply to retryable errors such as 5xx or connection failures.
+> - To persist the queue under Docker, mount a volume at `directory` (e.g. `--mount type=volume,src=otelcol-mackerel-queue,dst=/var/lib/otelcol-mackerel`). Without a volume, the queue is lost when the container is recreated.
+
 ## Components
 
 We have selected components provided from the OpenTelemetry community that are particularly beneficial.
@@ -223,3 +274,11 @@ If you are a Mackerel user and would like to add OpenTelemetry Collector compone
 | `routing`       | Routing Connector       | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/routingconnector)      |
 | `service_graph` | Service Graph Connector | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/servicegraphconnector) |
 | `span_metrics`  | Span Metrics Connector  | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector)  |
+
+### Extensions
+
+| Component      | Description            | Document                                                                                                               |
+| -------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `file_storage` | File Storage Extension | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/storage/filestorage)  |
+| `health_check` | Health Check Extension | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckextension) |
+| `pprof`        | pprof Extension        | [Document](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension)       |
