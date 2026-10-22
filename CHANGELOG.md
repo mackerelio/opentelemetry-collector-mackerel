@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.16.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.2...v0.16.0) - 2026-10-22
+
+### Other changes
+- Update actions/checkout action to v6.1.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/172
+- Update go module directive to v1.27.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/183
+- Update module github.com/go-git/go-git/v5 to v5.19.2 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/190
+- Update module go.yaml.in/yaml/v3 to v3.0.5 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/188
+- Use hatena/renovate-config with 5-day release age by @benevolent0505 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/194
+- Update actions/checkout action to v7 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/162
+- Update module google.golang.org/grpc to v1.83.1 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/184
+- Update docker/login-action action to v4.6.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/176
+- Update actions/create-github-app-token action to v3.3.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/189
+- Change logs endpoint to otlp.mackerelio.com by @mrasu in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/197
+- add extensions: filestorage, healthcheck, and pprof by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/198
+- Update module github.com/klauspost/compress to v1.18.7 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/200
+- Update module github.com/sigstore/sigstore-go to v1.2.1 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/191
+- Update docker/setup-qemu-action action to v4.4.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/160
+- Update docker/setup-buildx-action action to v4.4.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/182
+- Update module github.com/goreleaser/goreleaser/v2 to v2.18.3 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/179
+- Update Songmu/tagpr action to v1.21.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/169
+- Update module github.com/stretchr/testify to v1.12.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/193
+
 ## [v0.15.2](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.1...v0.15.2) - 2026-09-08
 
 ### Other changes
