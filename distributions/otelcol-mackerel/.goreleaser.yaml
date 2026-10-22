@@ -24,6 +24,13 @@ builds:
       - -s -w
     dir: _build
     binary: otelcol-mackerel
+snapshot:
+  # Override the version explicitly for convenience, so local snapshot builds
+  # work without setting GORELEASER_CURRENT_TAG. Because this is a monorepo,
+  # the latest git tag may be a submodule tag such as
+  # confmap/provider/zerocfgprovider/v0.15.2, which would leak into .Version
+  # and produce broken filenames.
+  version_template: "{{ .ShortCommit }}-SNAPSHOT"
 archives:
   - id: otelcol-mackerel
     ids:
