@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.16.1](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.16.0...v0.16.1) - 2026-10-23
+
+### Other changes
+- fix snapshot version naming for monorepo tags by @kmuto in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/199
+- Update module google.golang.org/grpc to v1.83.2 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/196
+- Update actions/setup-go action to v7 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/171
+
 ## [v0.16.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.15.2...v0.16.0) - 2026-10-22
 
 ### Other changes
