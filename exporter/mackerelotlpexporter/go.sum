@@ -98,8 +98,6 @@ github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e h1:JVG44RsyaB9T2KIHavM
 github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e/go.mod h1:RbqR21r5mrJuqunuUZ/Dhy/avygyECGrLceyNeo4LiM=
 go.opentelemetry.io/auto/sdk v1.2.1 h1:jXsnJ4Lmnqd11kwkBV2LgLoFMZKizbCi5fNZ/ipaZ64=
 go.opentelemetry.io/auto/sdk v1.2.1/go.mod h1:KRTj+aOaElaLi+wW1kO/DZRXwkF4C5xPbEe3ZiIhN7Y=
-go.opentelemetry.io/collector v0.155.0 h1:NTXq5yaCXJo6U+FLvcT9tucPh8mCw3aueFraaADlKTk=
-go.opentelemetry.io/collector v0.155.0/go.mod h1:OooJNOc1KV5TbAqXoOs5yld2qQQrvcHGHiX4ORjhzFY=
 go.opentelemetry.io/collector/client v1.69.0 h1:JaWIacYOkEq2aajAuNltTy7elsIpSPdNMe/I3+b28bY=
 go.opentelemetry.io/collector/client v1.69.0/go.mod h1:D3eMugzcsQlJyPJ0WXp2b7+yS72Uswi0e+WMQyNLzHo=
 go.opentelemetry.io/collector/component v1.69.0 h1:ZbVd2N+sCv39wUWQ4qtFG7wuTaok1EHaThbtdE/6Rn4=
@@ -170,6 +168,8 @@ go.opentelemetry.io/collector/featuregate v1.69.0 h1:RapEMYjBfvt9IUP3ypQ9Y7/g21n
 go.opentelemetry.io/collector/featuregate v1.69.0/go.mod h1:dRYifiJa2vQ6LWpPwHny4mL82mnGWsWEVeVWw+DhYJw=
 go.opentelemetry.io/collector/internal/componentalias v0.163.0 h1:VkZUBC9KtnInkP9cs3RjOVQWEe6ThbX1u92FItOc8/U=
 go.opentelemetry.io/collector/internal/componentalias v0.163.0/go.mod h1:6jHVr/SaT4hBiOMV2vHqK4jvonUki33IQ5Q6fX/NRAc=
+go.opentelemetry.io/collector/internal/statusutil v0.163.0 h1:IV1fo04jU5zWiFxPoSVEvEyjyRO8rrsUoY1ED1iQgto=
+go.opentelemetry.io/collector/internal/statusutil v0.163.0/go.mod h1:ZXwHY6Q3YyH5fgkK7VDk9+UEumPIcMbqlsAObX8VOT0=
 go.opentelemetry.io/collector/internal/testutil v0.163.0 h1:JR65ZHtuOP1E5cJZKl4ub/UFHQ7xo3KN/Iryhtc0P5E=
 go.opentelemetry.io/collector/internal/testutil v0.163.0/go.mod h1:RUvWdMZGEBicc0C3teDcnTrifUX8HB4AJ4l8pMONURU=
 go.opentelemetry.io/collector/pdata v1.69.0 h1:u0a2n1kOS/OGwIEQMOKCnl+bbmFG5wGO/OfFXajICpA=
