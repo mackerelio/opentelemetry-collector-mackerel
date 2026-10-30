@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.16.2](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.16.1...v0.16.2) - 2026-10-30
+
+### Other changes
+- Update module google.golang.org/grpc to v1.84.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/204
+- Update Songmu/tagpr action to v1.21.4 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/205
+- Update module github.com/goreleaser/goreleaser/v2 to v2.19.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/206
+- Update module github.com/go-jose/go-jose/v4 to v4.1.6 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/208
+- Update docker/login-action action to v4.7.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/209
+- Update opentelemetry-collector upstream dependencies by @mrasu in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/210
+
 ## [v0.16.1](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.16.0...v0.16.1) - 2026-10-26
 
 ### Other changes
