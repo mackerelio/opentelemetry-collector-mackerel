@@ -2,7 +2,7 @@ dist:
   module: github.com/mackerelio/opentelemetry-collector-mackerel/distributions/otelcol-mackerel
   name: otelcol-mackerel
   description: Mackerel OpenTelemetry Collector
-  version: 0.16.1
+  version: 0.16.2
   output_path: ./_build
 
 extensions:
@@ -15,7 +15,7 @@ exporters:
   - gomod: go.opentelemetry.io/collector/exporter/nopexporter v0.163.0
   - gomod: go.opentelemetry.io/collector/exporter/otlpexporter v0.163.0
   - gomod: go.opentelemetry.io/collector/exporter/otlphttpexporter v0.163.0
-  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.16.1
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter v0.16.2
 
 processors:
   - gomod: go.opentelemetry.io/collector/processor/batchprocessor v0.163.0
@@ -58,7 +58,7 @@ providers:
   - gomod: go.opentelemetry.io/collector/confmap/provider/httpsprovider v1.69.0
   - gomod: go.opentelemetry.io/collector/confmap/provider/yamlprovider v1.69.0
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/confmap/provider/s3provider v0.163.0
-  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider v0.16.1
+  - gomod: github.com/mackerelio/opentelemetry-collector-mackerel/confmap/provider/zerocfgprovider v0.16.2
 
 replaces:
   - github.com/mackerelio/opentelemetry-collector-mackerel/exporter/mackerelotlpexporter => ../../../exporter/mackerelotlpexporter
