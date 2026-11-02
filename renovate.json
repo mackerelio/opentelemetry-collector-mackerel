@@ -2,6 +2,10 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>hatena/renovate-config"],
   "minimumReleaseAge": "5 days",
+  "schedule": [
+    "on Monday after 09:00 before 18:00",
+    "on Tuesday after 09:00 before 18:00"
+  ],
   "ocb": { "managerFilePatterns": ["/^distributions/.*/manifest\\.yaml$/"] },
   "labels": ["dependencies"],
   "packageRules": [
