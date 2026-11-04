@@ -891,8 +891,8 @@ go.opentelemetry.io/build-tools v0.30.0 h1:rzIeZciImFTlEaqUHR1FCbK/34hLSSUgjsFzE
 go.opentelemetry.io/build-tools v0.30.0/go.mod h1:9eyHUXmLmD9euXP2BQ4oeqzzd57rLMkqqnXSrnlPY2g=
 go.opentelemetry.io/build-tools/multimod v0.30.0 h1:f3L37C35ds33QIx2pwacH4F+EZp9BxGjbw3IIplu+uc=
 go.opentelemetry.io/build-tools/multimod v0.30.0/go.mod h1:1pbgfye9qeRAWWsiuzeZ4fxfoAqkKr0Lvl+JPLSpbs8=
-go.opentelemetry.io/collector/cmd/builder v0.163.0 h1:fZkfTEAn0XHKZvExuhFOiTM6nH4Xy9f1beR3gU5eg6U=
-go.opentelemetry.io/collector/cmd/builder v0.163.0/go.mod h1:pu8Z6iYcHUmPaGC7kJSNqzzcSu0ee8pUqdhiEvumUDM=
+go.opentelemetry.io/collector/cmd/builder v0.164.0 h1:s1g6Hxppt+WFmB8EYxXOhmuntntUy8E5wJen5aFyy+U=
+go.opentelemetry.io/collector/cmd/builder v0.164.0/go.mod h1:pu8Z6iYcHUmPaGC7kJSNqzzcSu0ee8pUqdhiEvumUDM=
 go.opentelemetry.io/contrib/bridges/prometheus v0.67.0 h1:dkBzNEAIKADEaFnuESzcXvpd09vxvDZsOjx11gjUqLk=
 go.opentelemetry.io/contrib/bridges/prometheus v0.67.0/go.mod h1:Z5RIwRkZgauOIfnG5IpidvLpERjhTninpP1dTG2jTl4=
 go.opentelemetry.io/contrib/detectors/gcp v1.44.0 h1:NmLfL734pJhM0JKaYd2Y28+nY9dPRWYAAbxhRCrKXPw=
