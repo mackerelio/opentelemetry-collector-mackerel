@@ -600,8 +600,8 @@ github.com/knadh/koanf/providers/file v1.2.1 h1:bEWbtQwYrA+W2DtdBrQWyXqJaJSG3KrP
 github.com/knadh/koanf/providers/file v1.2.1/go.mod h1:bp1PM5f83Q+TOUu10J/0ApLBd9uIzg+n9UgthfY+nRA=
 github.com/knadh/koanf/providers/fs v1.0.1 h1:CfsoRTXgsuPOnXIj9LeFZju5pNnpF8woZavAS2UjdY0=
 github.com/knadh/koanf/providers/fs v1.0.1/go.mod h1:FksHET+xXFNDozvj8ZCdom54OnZ6eGKJtC5FhZJKx/8=
-github.com/knadh/koanf/v2 v2.3.8 h1:NftEOf0Y456FqpLJj31RYYZQnfBQ+DDhsNQPqJ6nuk4=
-github.com/knadh/koanf/v2 v2.3.8/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
+github.com/knadh/koanf/v2 v2.4.1 h1:MK2JDkLy4UGzEUkW1CCCKQftd9+M+NX8hAZ2axbf/jo=
+github.com/knadh/koanf/v2 v2.4.1/go.mod h1:gRb40VRAbd4iJMYYD5IxZ6hfuopFcXBpc9bbQpZwo28=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
@@ -891,8 +891,8 @@ go.opentelemetry.io/build-tools v0.30.0 h1:rzIeZciImFTlEaqUHR1FCbK/34hLSSUgjsFzE
 go.opentelemetry.io/build-tools v0.30.0/go.mod h1:9eyHUXmLmD9euXP2BQ4oeqzzd57rLMkqqnXSrnlPY2g=
 go.opentelemetry.io/build-tools/multimod v0.30.0 h1:f3L37C35ds33QIx2pwacH4F+EZp9BxGjbw3IIplu+uc=
 go.opentelemetry.io/build-tools/multimod v0.30.0/go.mod h1:1pbgfye9qeRAWWsiuzeZ4fxfoAqkKr0Lvl+JPLSpbs8=
-go.opentelemetry.io/collector/cmd/builder v0.164.0 h1:s1g6Hxppt+WFmB8EYxXOhmuntntUy8E5wJen5aFyy+U=
-go.opentelemetry.io/collector/cmd/builder v0.164.0/go.mod h1:pu8Z6iYcHUmPaGC7kJSNqzzcSu0ee8pUqdhiEvumUDM=
+go.opentelemetry.io/collector/cmd/builder v0.165.0 h1:UKsS/BX+7hEP1MwjHYTPB8yB7z0LSVAC5BTlrSKgpY0=
+go.opentelemetry.io/collector/cmd/builder v0.165.0/go.mod h1:6InvBAKSGzyIfFzNca4NqL1VMdXUkEZYtzI74wrYCI4=
 go.opentelemetry.io/contrib/bridges/prometheus v0.67.0 h1:dkBzNEAIKADEaFnuESzcXvpd09vxvDZsOjx11gjUqLk=
 go.opentelemetry.io/contrib/bridges/prometheus v0.67.0/go.mod h1:Z5RIwRkZgauOIfnG5IpidvLpERjhTninpP1dTG2jTl4=
 go.opentelemetry.io/contrib/detectors/gcp v1.46.0 h1:PI8dGkqDaQkwJ8kOopqMhDTbrnK3UIeG/RCHH4HErbo=
