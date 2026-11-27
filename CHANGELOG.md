@@ -1,5 +1,33 @@
 # Changelog
 
+## [v0.17.0](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.16.1...v0.17.0) - 2026-11-24
+
+### Base opentelemetry-collector libraries updates
+- Update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/161
+- Update opentelemetry-collector upstream dependencies by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/221
+### Other changes
+- Update module google.golang.org/grpc to v1.84.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/204
+- Update Songmu/tagpr action to v1.21.4 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/205
+- Update module github.com/goreleaser/goreleaser/v2 to v2.19.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/206
+- Update module github.com/go-jose/go-jose/v4 to v4.1.6 [SECURITY] by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/208
+- Update docker/login-action action to v4.7.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/209
+- Update opentelemetry-collector upstream dependencies by @mrasu in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/210
+- Change Renovate schedule to Mon/Tue 9:00-18:00 JST by @benevolent0505 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/212
+- Update module google.golang.org/grpc to v1.85.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/211
+- Update module github.com/goreleaser/goreleaser/v2 to v2.20.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/216
+- Update module github.com/caarlos0/env/v11 to v11.4.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/213
+- Update module go.yaml.in/yaml/v3 to v3.0.6 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/214
+- Update module github.com/goreleaser/goreleaser/v2 to v2.20.1 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/219
+- Update docker/login-action action to v4.8.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/220
+- Update go module directive to v1.27.4 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/218
+- Update module go.yaml.in/yaml/v3 to v4 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/217
+- Update module github.com/goreleaser/goreleaser/v2 to v2.20.2 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/222
+- Update Songmu/tagpr action to v1.22.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/215
+- Update actions/setup-go action to v7.1.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/223
+- Update module go.opentelemetry.io/build-tools/multimod to v0.31.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/224
+- Update actions/create-github-app-token action to v3.4.0 by @renovate[bot] in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/226
+- Update module go.yaml.in/yaml/v3 to v4 by @azukiazusa1 in https://github.com/mackerelio/opentelemetry-collector-mackerel/pull/227
+
 ## [v0.16.1](https://github.com/mackerelio/opentelemetry-collector-mackerel/compare/v0.16.0...v0.16.1) - 2026-10-26
 
 ### Other changes
